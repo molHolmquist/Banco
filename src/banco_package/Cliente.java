@@ -3,7 +3,8 @@ package banco_package;
 public class Cliente {
 
 	
-	//Comentario util
+	
+	//Adicionando feature 1
 	public static void main(String[] args) {
 		
 		Cliente juse = new Cliente("Juse","07320176610","Rua Jose Afonso","3241-5264");

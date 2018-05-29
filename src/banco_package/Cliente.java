@@ -2,8 +2,6 @@ package banco_package;
 
 public class Cliente {
 
-	
-	
 	//Adicionando feature 1
 	public static void main(String[] args) {
 		

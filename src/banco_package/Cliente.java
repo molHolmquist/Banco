@@ -10,7 +10,8 @@ public class Cliente {
 //		System.out.println(juse.cpf_cnpj);
 //		System.out.println(juse.fone);
 		Conta contaJuse = new Conta(juse);
-		System.out.println(contaJuse.getNumConta());
+		contaJuse.debitaConta(22, "Compra de bala");
+		System.out.println(contaJuse.getSaldo());
 
 	}
 	

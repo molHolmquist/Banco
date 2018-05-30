@@ -9,7 +9,7 @@ public class Conta {
 	private ArrayList<Movimentacao> listaMov = new ArrayList<Movimentacao>();
 	
 	Conta(Cliente cliente){
-		this.saldo = 0;
+		this.saldo = 20;
 		this.cliente = cliente;
 		this.numConta = proximoNumConta;
 		proximoNumConta++;
@@ -22,6 +22,17 @@ public class Conta {
 	}
 	public Cliente getCliente() {
 		return cliente;
+	}
+	public void debitaConta(double valor, String descricao) {
+		Movimentacao Mov = new Movimentacao(descricao, 'D', valor);
+		this.listaMov.add(Mov);
+		double novo_saldo = this.saldo - valor;
+		if(novo_saldo > 0) {
+			this.saldo = novo_saldo;
+		}
+		else {
+			System.out.println("Movimentacao invalida");
+		}
 	}
 	
 }

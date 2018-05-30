@@ -1,5 +1,7 @@
 package banco_package;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.Iterator;
 
 public class Conta {
 	private int numConta;
@@ -34,6 +36,31 @@ public class Conta {
 			System.out.println("Movimentacao invalida");
 		}
 	}
+	
+	
+	public ArrayList<Movimentacao> extrato(GregorianCalendar dataInicial, GregorianCalendar dataFinal){
+			
+			Iterator<Movimentacao> Lista_movimentacao_iterator = listaMov.iterator();
+			
+			ArrayList<Movimentacao> listaRetorno = new ArrayList<Movimentacao>();
+			
+			while(Lista_movimentacao_iterator.hasNext()) {
+				Movimentacao m = Lista_movimentacao_iterator.next();
+				
+				// Quanto ao método compareTo aplicado na data do interador específico m
+				// que está passando por toda a lista, sabe-se:
+				
+				// Retorna 0 se na mesma data que dataInicial
+				// Retorna número negativo se no futuro em relação a dataInicial
+				// Retorna número positivo se no passado em relação a dataInicial
+				
+				if((m.getDataMov().compareTo(dataInicial)<=0) && (m.getDataMov().compareTo(dataFinal)>=0)) {
+					listaRetorno.add(m);
+				}
+				
+			}
+			return listaRetorno;
+		}
 	
 }
 

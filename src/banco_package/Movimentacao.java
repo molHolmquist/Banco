@@ -8,14 +8,16 @@ public class Movimentacao {
 	private String descricao;
 	private char debitoCredito;
 	private double valor;
+	private static int mes = 2;
 	
 	
 	Movimentacao(String desc, char debCre, double val){
 		
-		dataMov = new GregorianCalendar();
+		dataMov = new GregorianCalendar(2018, mes, 28);
 		descricao = new String(desc);
 		debitoCredito = debCre;
 		valor = val;
+		mes++;
 		
 	}
 

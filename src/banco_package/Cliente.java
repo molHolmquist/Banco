@@ -6,9 +6,12 @@ public class Cliente {
 	public static void main(String[] args) {
 		
 		Cliente juse = new Cliente("Juse","07320176610","Rua Jose Afonso","3241-5264");
-		System.out.println(juse.getNomeCliente());
-		System.out.println(juse.cpf_cnpj);
-		System.out.println(juse.fone);
+//		System.out.println(juse.getNomeCliente());
+//		System.out.println(juse.cpf_cnpj);
+//		System.out.println(juse.fone);
+		Conta contaJuse = new Conta(juse);
+		System.out.println(contaJuse.getNumConta());
+
 	}
 	
 	private String nomeCliente;

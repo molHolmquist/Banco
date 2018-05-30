@@ -1,12 +1,19 @@
 package banco_package;
+import java.util.ArrayList;
 
 public class Conta {
 	private int numConta;
 	private double saldo;
 	private Cliente cliente;
-	private static int proximoNumConta;
-	//TODO lista movimentação
-	//TODO lista movimentação
+	private static int proximoNumConta = 1;
+	private ArrayList<Movimentacao> listaMov = new ArrayList<Movimentacao>();
+	
+	Conta(Cliente cliente){
+		this.saldo = 0;
+		this.cliente = cliente;
+		this.numConta = proximoNumConta;
+		proximoNumConta++;
+	}
 	public int getNumConta() {
 		return numConta;
 	}
@@ -17,5 +24,5 @@ public class Conta {
 		return cliente;
 	}
 	
-
 }
+

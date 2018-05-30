@@ -18,24 +18,18 @@ public class Cliente {
 		contaArnaldo.creditarConta(50,  "Restaurante Boi dos Vales");
 		contaArnaldo.creditarConta(20,  "Arroz");
 		contaArnaldo.creditarConta(300,  "Batata");
+		//GregorianCalendar data = new GregorianCalendar();
 		GregorianCalendar data = new GregorianCalendar(2018, 3, 25);
 		
 		System.out.println(arnaldo.getCpf_cnpj());
 		
 		ArrayList<Movimentacao> lista_segredos_arnaldo = contaArnaldo.extrato(data);
 		
-		Iterator<Movimentacao> Lista_mov_arnaldo = lista_segredos_arnaldo.iterator();
-		
-		while(Lista_mov_arnaldo.hasNext()) {
+		System.out.println(lista_segredos_arnaldo.size());
+		for(Movimentacao m: lista_segredos_arnaldo) {
 			
-			Movimentacao m = Lista_mov_arnaldo.next();
 			System.out.println(m.getDescricao());
-			// Quanto ao método compareTo aplicado na data do interador específico m abaixo
-			// que está passando por toda a lista, sabe-se:
-			
-			// Retorna 0 se na mesma data que dataInicial
-			// Retorna número negativo se no futuro em relação a dataInicial
-			// Retorna número positivo se no passado em relação a dataInicial
+			System.out.println(m.getDataMov().toZonedDateTime());
 			
 		}
 		

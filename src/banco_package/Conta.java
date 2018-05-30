@@ -23,6 +23,13 @@ public class Conta {
 	public Cliente getCliente() {
 		return cliente;
 	}
+	public void creditarConta(double valorCreditado, String descricaoMovimentacao) {
+		
+		Movimentacao nova_movimentacao = new Movimentacao(descricaoMovimentacao, 'C', valorCreditado);
+		listaMov.add(nova_movimentacao);
+		saldo += valorCreditado;
+	}
+	
 	
 }
 

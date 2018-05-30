@@ -32,13 +32,12 @@ public class Conta {
 	public ArrayList<Movimentacao> extrato(GregorianCalendar dataInicial){
 		
 		Iterator<Movimentacao> Lista_movimentacao_iterator = listaMov.iterator();
-		
 		ArrayList<Movimentacao> listaRetorno = new ArrayList<Movimentacao>();
 		
 		while(Lista_movimentacao_iterator.hasNext()) {
-			Movimentacao m = Lista_movimentacao_iterator.next();
 			
-			// Quanto ao método compareTo aplicado na data do interador específico m
+			Movimentacao m = Lista_movimentacao_iterator.next();
+			// Quanto ao método compareTo aplicado na data do interador específico m abaixo
 			// que está passando por toda a lista, sabe-se:
 			
 			// Retorna 0 se na mesma data que dataInicial

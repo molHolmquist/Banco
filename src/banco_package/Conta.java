@@ -34,7 +34,7 @@ public class Conta {
 		ArrayList<Movimentacao> listaRetorno = new ArrayList<Movimentacao>();
 		
 		for(Movimentacao m: listaMov) {
-			//compareTo: negativo se no futuro em relação a dataInicial.
+			//compareTo: positivo se no futuro em relação a dataInicial.
 			if(m.getDataMov().compareTo(dataInicial)>=0) {
 				listaRetorno.add(m);
 			}

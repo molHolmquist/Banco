@@ -11,7 +11,7 @@ public class Conta {
 	private ArrayList<Movimentacao> listaMov = new ArrayList<Movimentacao>();
 	
 	Conta(Cliente cliente){
-		this.saldo = 20; //TODO zerar isso
+		this.saldo = 0;
 		this.cliente = cliente;
 		this.numConta = proximoNumConta;
 		proximoNumConta++;

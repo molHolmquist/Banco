@@ -7,18 +7,14 @@ public class Movimentacao {
 	private GregorianCalendar dataMov;
 	private String descricao;
 	private char debitoCredito;
-	private double valor;
-	private static int mes = 2; //TODO apagar isso
-	
+	private double valor;	
 	
 	Movimentacao(String desc, char debCre, double val){
 		
-		dataMov = new GregorianCalendar(2018, mes, 3);
+		dataMov = new GregorianCalendar();
 		descricao = new String(desc);
 		debitoCredito = debCre;
-		valor = val;
-		mes++;//mes e incrementado para que as proximas operacoes sejam em meses diferentes.
-		
+		valor = val;		
 	}
 
 

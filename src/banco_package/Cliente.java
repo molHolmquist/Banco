@@ -14,20 +14,17 @@ public class Cliente {
 //		System.out.println(juse.cpf_cnpj);
 //		System.out.println(juse.fone);
 		Conta contaJuse = new Conta(juse);
-		contaJuse.debitaConta(2, "Compra de bala");
+		contaJuse.debitaConta(2, "Compra dey bala");//Operacoes de teste
 		contaJuse.debitaConta(1, "Compra de bala");
 		contaJuse.debitaConta(1.56, "Compra de livro");
 		contaJuse.debitaConta(7, "Compra de chiclete");
-		GregorianCalendar hoje = new GregorianCalendar();
-		GregorianCalendar umaDataLa = new GregorianCalendar(2018, 1, 1);
-		ArrayList<Movimentacao> juseMov = new ArrayList<Movimentacao>(); 
-		juseMov = contaJuse.extrato(umaDataLa, hoje);
-		int i = 0;
-	    for (Iterator<Movimentacao> iterator = juseMov.iterator(); iterator.hasNext();) {
-			Movimentacao mov = iterator.next();
-			System.out.printf("operacao %d- descricao: %s\n", i, juseMov.get(i).getDescricao());
-			  i++;
+		GregorianCalendar dataFinal = new GregorianCalendar(2018, 4, 5);
+		GregorianCalendar dataInicial = new GregorianCalendar(2018, 1, 1);
+		ArrayList<Movimentacao> juseMov = contaJuse.extrato(dataInicial, dataFinal);
+		for(Movimentacao Mov: juseMov) {
+			System.out.println(Mov.getDescricao()+"-mes:"+Mov.getDataMov().toZonedDateTime());
 		}
+		//System.out.println(contaJuse.getSaldo());
 
 	}
 	

@@ -11,7 +11,7 @@ public class Conta {
 	private ArrayList<Movimentacao> listaMov = new ArrayList<Movimentacao>();
 	
 	Conta(Cliente cliente){
-		this.saldo = 20;
+		this.saldo = 20; //TODO zerar isso
 		this.cliente = cliente;
 		this.numConta = proximoNumConta;
 		proximoNumConta++;
@@ -54,7 +54,7 @@ public class Conta {
 				// Retorna número negativo se no futuro em relação a dataInicial
 				// Retorna número positivo se no passado em relação a dataInicial
 				
-				if((m.getDataMov().compareTo(dataInicial)<=0) && (m.getDataMov().compareTo(dataFinal)>=0)) {
+				if( (m.getDataMov().compareTo(dataInicial)>=0) && (m.getDataMov().compareTo(dataFinal)<=0)) {
 					listaRetorno.add(m);
 				}
 				

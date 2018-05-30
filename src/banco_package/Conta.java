@@ -25,6 +25,9 @@ public class Conta {
 	public Cliente getCliente() {
 		return cliente;
 	}
+	public static int getNumeroDeContas() {
+		return proximoNumConta;
+	}
 	public void debitaConta(double valor, String descricao) {
 		Movimentacao Mov = new Movimentacao(descricao, 'D', valor);
 		double novo_saldo = this.saldo - valor;
@@ -36,12 +39,27 @@ public class Conta {
 			System.out.println("Movimentacao invalida");
 		}
 	}
-	public static int getNumeroDeContas() {
-		return proximoNumConta;
+	public void creditaConta(double valorCreditado, String descricaoMovimentacao) {
+		
+		Movimentacao nova_movimentacao = new Movimentacao(descricaoMovimentacao, 'C', valorCreditado);
+		listaMov.add(nova_movimentacao);
+		saldo += valorCreditado;
+	}
+	public ArrayList<Movimentacao> extrato(GregorianCalendar dataInicial){
+		
+		ArrayList<Movimentacao> listaRetorno = new ArrayList<Movimentacao>();
+		
+		for(Movimentacao m: listaMov) {
+			//compareTo: positivo se no futuro em relação a dataInicial.
+			if(m.getDataMov().compareTo(dataInicial)>=0) {
+				listaRetorno.add(m);
+			}
+		}
+		
+		return listaRetorno;
 	}
 	
 	public ArrayList<Movimentacao> extrato(GregorianCalendar dataInicial, GregorianCalendar dataFinal){
-			
 			
 			ArrayList<Movimentacao> listaRetorno = new ArrayList<Movimentacao>();
 			
@@ -73,25 +91,8 @@ public class Conta {
 		}
 		return extratoMes;
 	}
-	public void creditarConta(double valorCreditado, String descricaoMovimentacao) {
-		
-		Movimentacao nova_movimentacao = new Movimentacao(descricaoMovimentacao, 'C', valorCreditado);
-		listaMov.add(nova_movimentacao);
-		saldo += valorCreditado;
-	}
-	public ArrayList<Movimentacao> extrato(GregorianCalendar dataInicial){
-		
-		ArrayList<Movimentacao> listaRetorno = new ArrayList<Movimentacao>();
-		
-		for(Movimentacao m: listaMov) {
-			//compareTo: positivo se no futuro em relação a dataInicial.
-			if(m.getDataMov().compareTo(dataInicial)>=0) {
-				listaRetorno.add(m);
-			}
-		}
-		
-		return listaRetorno;
-	}
+	
+
 	
 }
 

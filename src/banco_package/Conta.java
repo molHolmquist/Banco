@@ -45,7 +45,23 @@ public class Conta {
 		
 		return listaRetorno;
 	}
+	/*
+	public ArrayList<Movimentacao> extrato(){
+		
+		ArrayList<Movimentacao> listaRetorno = new ArrayList<Movimentacao>();
 
+		
+		
+		for(Movimentacao m: listaMov) {
+			//compareTo: positivo se no futuro em relação a dataInicial.
+			if(m.getDataMov().compareTo(dataInicial)>=0) {
+				listaRetorno.add(m);
+			}
+		}
+		
+		return listaRetorno;
+	}
+*/
 	
 	
 }

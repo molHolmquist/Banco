@@ -1,7 +1,6 @@
 package banco_package;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class main_teste {
@@ -24,14 +23,17 @@ public class main_teste {
 		//GregorianCalendar data = new GregorianCalendar();
 		GregorianCalendar data = new GregorianCalendar(2018, 3, 25);
 		
-		System.out.println(juse.getCpf_cnpj());
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(data.getTimeInMillis());
 		
-		ArrayList<Movimentacao> lista_segredos_arnaldo = contaArnaldo.extrato(data);
+		int mYear = calendar.get(Calendar.YEAR);
+		int mMonth = calendar.get(Calendar.MONTH);
+		int mDay = calendar.get(Calendar.DAY_OF_MONTH);
 		
-		System.out.println(lista_segredos_arnaldo.size());
-		for(Movimentacao m: lista_segredos_arnaldo) {
-			
-			System.out.println("Descricao da movimentacao" + m. "m.getDescricao());
+		System.out.println(mDay + "/" + mMonth + "/" + mYear);
+
+		/*
+		for(Movimentacao m: contaArnaldo.extrato(data)) {
 			
 			SimpleDateFormat fmt = new SimpleDateFormat("dd-MMM-yyyy");
 		    fmt.setCalendar(m.getDataMov());
@@ -39,6 +41,7 @@ public class main_teste {
 			System.out.println(m.getDescricao() + "-mes:"+ " " + dateFormatted);
 			
 		}
+		*/
 	}
 
 }

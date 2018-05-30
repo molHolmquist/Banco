@@ -1,5 +1,6 @@
 package banco_package;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -30,8 +31,12 @@ public class main_teste {
 		System.out.println(lista_segredos_arnaldo.size());
 		for(Movimentacao m: lista_segredos_arnaldo) {
 			
-			System.out.println(m.getDescricao());
-			System.out.println(m.getDataMov().toZonedDateTime());
+			System.out.println("Descricao da movimentacao" + m. "m.getDescricao());
+			
+			SimpleDateFormat fmt = new SimpleDateFormat("dd-MMM-yyyy");
+		    fmt.setCalendar(m.getDataMov());
+		    String dateFormatted = fmt.format(m.getDataMov().getTime());
+			System.out.println(m.getDescricao() + "-mes:"+ " " + dateFormatted);
 			
 		}
 	}

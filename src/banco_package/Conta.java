@@ -23,6 +23,9 @@ public class Conta {
 	public Cliente getCliente() {
 		return cliente;
 	}
+	public static int getNumeroDeContas() {
+		return proximoNumConta;
+	}
 	public void creditarConta(double valorCreditado, String descricaoMovimentacao) {
 		
 		Movimentacao nova_movimentacao = new Movimentacao(descricaoMovimentacao, 'C', valorCreditado);
@@ -42,6 +45,7 @@ public class Conta {
 		
 		return listaRetorno;
 	}
+
 	
 	
 }

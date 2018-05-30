@@ -1,5 +1,6 @@
 package banco_package;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 
@@ -27,10 +28,10 @@ public class Conta {
 	}
 	public void debitaConta(double valor, String descricao) {
 		Movimentacao Mov = new Movimentacao(descricao, 'D', valor);
-		this.listaMov.add(Mov);
 		double novo_saldo = this.saldo - valor;
 		if(novo_saldo > 0) {
 			this.saldo = novo_saldo;
+			this.listaMov.add(Mov);
 		}
 		else {
 			System.out.println("Movimentacao invalida");
@@ -61,6 +62,17 @@ public class Conta {
 			}
 			return listaRetorno;
 		}
+	public ArrayList<Movimentacao> extrato(){
+		GregorianCalendar calendar = new GregorianCalendar();
+		int month = calendar.get(calendar.MONTH);
+		ArrayList<Movimentacao> extratoMes = new ArrayList<Movimentacao>();
+		for(Movimentacao Mov:listaMov) {
+			if(month == Mov.getDataMov().get(Mov.getDataMov().MONTH)) {
+				extratoMes.add(Mov);
+			}
+		}
+		return extratoMes;
+	}
 	
 }
 

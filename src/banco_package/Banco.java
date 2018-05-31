@@ -73,6 +73,15 @@ public class Banco {
 			}
 		}
 	}
+	public void transferencia(int numeroContaOrigem, int numeroContaDestino, double valor) {
+		Conta origem = this.procuraConta(numeroContaOrigem);
+		Conta destino = this.procuraConta(numeroContaDestino);
+		if(origem.getSaldo() >= valor) {
+			origem.debitaConta(valor, "Transferência para conta" + numeroContaDestino);
+			destino.creditaConta(valor, "Transferencia da conta" + numeroContaOrigem);
+		}
+		else {System.out.println("A conta de origem não possui saldo suficiente");}
+	}
 	public double saldoConta(int numeroConta) {
 		Conta c = this.procuraConta(numeroConta);
 		return c.getSaldo();

@@ -32,9 +32,9 @@ public class main_teste {
 		bradesco.insereConta(arnaldo);
 		bradesco.deposita(1, 10);
 		bradesco.saca(1, 2.51);
-		//bradesco.excluiCliente("07320176610");
+		bradesco.transferencia(1, 2, 7.5);
 		
-		System.out.println(bradesco.saldoConta(1));
+		System.out.println(bradesco.saldoConta(2));
 		ArrayList<Conta> c = bradesco.getListaContas();
 		for(Conta m:c) {
 			System.out.println();

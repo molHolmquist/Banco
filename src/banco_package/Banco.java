@@ -1,6 +1,7 @@
 package banco_package;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 
@@ -27,30 +28,52 @@ public class Banco {
 		Conta c = new Conta(cliente);
 		this.listaContas.add(c);
 	}
-	//TODO excluir cliente	
-//	public void excluiCliente(String cpfOuCnpj) {
-//		boolean found = false;
-//		Iterator<Cliente> itr = this.listaClientes.iterator();
-//		while(itr.hasNext()) {
-//			Cliente c = itr.next();
-//			if(c.getCpf_cnpj().equals(cpfOuCnpj)) {
-//				System.out.println("Rodou isso");
-//				Iterator<Conta> itrcont = this.listaContas.iterator();
-//				while(itrcont.hasNext()) {
-//					Conta cont = itrcont.next();
-//					if(c.equals(cont.getCliente())) {
-//						System.out.println("Cliente possui conta");
-//						found = false;
-//						break;
-//					}
-//					else {found = true;}
-//				}
-//			}
-//			if(found) {				
-//				itr.remove();
-//			}
-//		}
-//	}
+	
+	public void excluiCliente(String cpfOuCnpj) {
+		
+		boolean foundConta = false;
+		
+		for(Conta contaIterator : listaContas) {
+			
+			Cliente c = contaIterator.getCliente();			
+			String cpfOuCnpj_Cliente = c.getCpf_cnpj();
+			
+			if(cpfOuCnpj_Cliente.equals(cpfOuCnpj)) {	
+				//Conta de cliente que se deseja remover encontrada.
+				foundConta = true;
+				//Cliente não pode ser excluído com conta no banco.
+				System.out.println("Cliente possui uma conta no banco e por isso não será excluído.");
+				break;
+			}
+			
+		}
+		
+		// Se não achou a conta, deletar cliente.
+		if(!foundConta) {
+			
+			boolean foundCliente = false;
+			for(Cliente c : listaClientes) {
+				
+				String cpfOuCnpj_Cliente = c.getCpf_cnpj();
+				
+				if(cpfOuCnpj_Cliente.equals(cpfOuCnpj)) {
+					
+					listaClientes.remove(c);
+					foundCliente = true;
+					break;
+				}
+			}
+			// Se não achou o cliente, avisar usuário que esse cliente
+			// não faz parte deste banco
+			if(!foundCliente) {
+				System.out.println("Cliente não faz parte deste banco, logo não faz sentido excluí-lo.");
+				
+			}
+			
+		}
+		
+		
+	}
 	
 	public void excluiConta(int numeroConta) {
 		for(Conta c : this.listaContas) {
@@ -92,8 +115,11 @@ public class Banco {
 	}
 	public void cobraCPMF() {
 		GregorianCalendar hoje = new GregorianCalendar();
+		hoje.add((GregorianCalendar.DAY_OF_MONTH), -1);
 		GregorianCalendar semanaPassada = new GregorianCalendar();
 		semanaPassada.add((GregorianCalendar.DAY_OF_MONTH), -7);
+		
+
 		for(Conta c : this.listaContas) {
 			double CPMF = 0;
 			for(Movimentacao m : c.extrato(semanaPassada, hoje)){
@@ -101,7 +127,8 @@ public class Banco {
 					CPMF = CPMF + (0.0038*m.getValor());
 				}
 			}
-			c.debitaConta(CPMF, "Cobrança de CPMF");			
+			if(CPMF > 0)
+				c.debitaConta(CPMF, "Cobrança de CPMF");			
 		}
 	}
 	public double saldoConta(int numeroConta) {
@@ -125,6 +152,12 @@ public class Banco {
 	}
 	public ArrayList<Conta> getListaContas(){
 		return this.listaContas;
+	}
+	
+	//Adicionado para que o NomeBanco não seja perdido depois
+	//que seu valor for atribuido no construtor.
+	public String getNomeBanco() {
+		return nomeBanco;
 	}
 	
 }

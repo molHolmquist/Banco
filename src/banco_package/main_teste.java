@@ -28,12 +28,19 @@ public class main_teste {
 		Banco bradesco = new Banco("bradesco"); 
 		bradesco.insereCliente(juse);
 		bradesco.criaConta(juse);
-		bradesco.insereCliente(arnaldo);
-		bradesco.criaConta(arnaldo);
+		//bradesco.insereCliente(arnaldo);
+		//bradesco.criaConta(arnaldo);
 		bradesco.deposita(1, 100000);
 		bradesco.saca(1, 100);
-		bradesco.transferencia(1, 2, 100);
+		//bradesco.transferencia(1, 2, 100);
 		bradesco.cobraCPMF();
+		
+		
+		bradesco.excluiCliente("09087987709");
+		
+		for(Cliente c : bradesco.getListaCliente()) {
+			System.out.println(c.getNomeCliente());
+		}
 		
 		System.out.println(bradesco.saldoConta(1));
 		

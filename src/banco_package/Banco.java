@@ -11,6 +11,14 @@ public class Banco {
 	Banco(String nomeBanco){
 		this.nomeBanco = nomeBanco;
 	}
+	private Conta procuraConta(int numeroConta) { //procura uma conta com base
+		for(Conta c : this.listaContas) {		  //no número dela.
+			if(c.getNumConta() == numeroConta) {
+				return c;
+			}
+		}
+		return null;
+	}
 	public void insereCliente(Cliente cliente) {
 		this.listaClientes.add(cliente);
 	}
@@ -19,29 +27,29 @@ public class Banco {
 		this.listaContas.add(c);
 	}
 	//TODO excluir cliente	
-	public void excluiCliente(String cpfOuCnpj) {
-		boolean found = false;
-		Iterator<Cliente> itr = this.listaClientes.iterator();
-		while(itr.hasNext()) {
-			Cliente c = itr.next();
-			if(c.getCpf_cnpj().equals(cpfOuCnpj)) {
-				System.out.println("Rodou isso");
-				Iterator<Conta> itrcont = this.listaContas.iterator();
-				while(itrcont.hasNext()) {
-					Conta cont = itrcont.next();
-					if(c.equals(cont.getCliente())) {
-						System.out.println("Cliente possui conta");
-						found = false;
-						break;
-					}
-					else {found = true;}
-				}
-			}
-			if(found) {				
-				itr.remove();
-			}
-		}
-	}
+//	public void excluiCliente(String cpfOuCnpj) {
+//		boolean found = false;
+//		Iterator<Cliente> itr = this.listaClientes.iterator();
+//		while(itr.hasNext()) {
+//			Cliente c = itr.next();
+//			if(c.getCpf_cnpj().equals(cpfOuCnpj)) {
+//				System.out.println("Rodou isso");
+//				Iterator<Conta> itrcont = this.listaContas.iterator();
+//				while(itrcont.hasNext()) {
+//					Conta cont = itrcont.next();
+//					if(c.equals(cont.getCliente())) {
+//						System.out.println("Cliente possui conta");
+//						found = false;
+//						break;
+//					}
+//					else {found = true;}
+//				}
+//			}
+//			if(found) {				
+//				itr.remove();
+//			}
+//		}
+//	}
 	
 	public void excluiConta(int numeroConta) {
 		for(Conta c : this.listaContas) {
@@ -58,7 +66,17 @@ public class Banco {
 			}
 		}
 	}
-	
+	public void saca(int numeroConta, double valor) {
+		for(Conta c:this.listaContas) {
+			if(c.getNumConta() == numeroConta) {
+				c.debitaConta(valor, "Saque");
+			}
+		}
+	}
+	public double saldoConta(int numeroConta) {
+		Conta c = this.procuraConta(numeroConta);
+		return c.getSaldo();
+	}
 	
 	public ArrayList<Cliente> getListaCliente(){
 		return this.listaClientes;

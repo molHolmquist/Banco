@@ -27,14 +27,17 @@ public class main_teste {
 		
 		Banco bradesco = new Banco("bradesco"); 
 		bradesco.insereCliente(juse);
-		//bradesco.insereConta(juse);
+		bradesco.insereConta(juse);
 		bradesco.insereCliente(arnaldo);
 		bradesco.insereConta(arnaldo);
-		bradesco.excluiCliente("07320176610");
+		bradesco.deposita(1, 10);
+		bradesco.saca(1, 2.51);
+		//bradesco.excluiCliente("07320176610");
 		
-		ArrayList<Cliente> c = bradesco.getListaCliente();
-		for(Cliente m:c) {
-			System.out.println(m.getNomeCliente());
+		System.out.println(bradesco.saldoConta(1));
+		ArrayList<Conta> c = bradesco.getListaContas();
+		for(Conta m:c) {
+			System.out.println();
 		}
 		
 //		int mYear = calendar.get(Calendar.YEAR);

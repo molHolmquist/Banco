@@ -29,21 +29,30 @@ public class Conta {
 		return proximoNumConta;
 	}
 	public void debitaConta(double valor, String descricao) {
-		Movimentacao Mov = new Movimentacao(descricao, 'D', valor);
-		double novo_saldo = this.saldo - valor;
-		if(novo_saldo > 0) {
-			this.saldo = novo_saldo;
-			this.listaMov.add(Mov);
+		if(valor >= 0) {
+			Movimentacao Mov = new Movimentacao(descricao, 'D', valor);
+			double novo_saldo = this.saldo - valor;
+			if(novo_saldo > 0) {
+				this.saldo = novo_saldo;
+				this.listaMov.add(Mov);
+			}
+			else {
+				System.out.println("Movimentacao invalida");
+			}
 		}
 		else {
 			System.out.println("Movimentacao invalida");
 		}
 	}
 	public void creditaConta(double valorCreditado, String descricaoMovimentacao) {
-		
-		Movimentacao nova_movimentacao = new Movimentacao(descricaoMovimentacao, 'C', valorCreditado);
-		listaMov.add(nova_movimentacao);
-		saldo += valorCreditado;
+		if(valorCreditado >= 0) {
+			Movimentacao nova_movimentacao = new Movimentacao(descricaoMovimentacao, 'C', valorCreditado);
+			listaMov.add(nova_movimentacao);
+			saldo += valorCreditado;
+		}
+		else {
+			System.out.println("Movimentacao invalida");
+		}
 	}
 	public ArrayList<Movimentacao> extrato(GregorianCalendar dataInicial){
 		

@@ -10,7 +10,6 @@ public class Movimentacao {
 	private double valor;	
 	
 	Movimentacao(String desc, char debCre, double val){
-		
 		dataMov = new GregorianCalendar();
 		descricao = new String(desc);
 		debitoCredito = debCre;

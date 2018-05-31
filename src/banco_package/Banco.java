@@ -1,6 +1,7 @@
 package banco_package;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 
 public class Banco {
@@ -22,7 +23,7 @@ public class Banco {
 	public void insereCliente(Cliente cliente) {
 		this.listaClientes.add(cliente);
 	}
-	public void insereConta(Cliente cliente) {
+	public void criaConta(Cliente cliente) {
 		Conta c = new Conta(cliente);
 		this.listaContas.add(c);
 	}
@@ -82,11 +83,29 @@ public class Banco {
 		}
 		else {System.out.println("A conta de origem não possui saldo suficiente");}
 	}
+	public void cobraTarifa() {
+		for(Conta c: this.listaContas) {
+			if(c.getSaldo() >= 15) {//So cobra 15 se a conta tiver saldo suficente
+				c.debitaConta(15, "Cobrança de Tarifa");
+			}
+		}
+	}
 	public double saldoConta(int numeroConta) {
 		Conta c = this.procuraConta(numeroConta);
 		return c.getSaldo();
 	}
-	
+	public ArrayList<Movimentacao> extratoConta(int numeroConta){
+		Conta c = this.procuraConta(numeroConta);
+		return c.extrato();
+	}
+	public ArrayList<Movimentacao> extratoConta(int numeroConta, GregorianCalendar dataInicial){
+		Conta c = this.procuraConta(numeroConta);
+		return c.extrato(dataInicial);
+	}
+	public ArrayList<Movimentacao> extratoConta(int numeroConta, GregorianCalendar dataInicial, GregorianCalendar dataFinal){
+		Conta c = this.procuraConta(numeroConta);
+		return c.extrato(dataInicial, dataFinal);
+	}
 	public ArrayList<Cliente> getListaCliente(){
 		return this.listaClientes;
 	}

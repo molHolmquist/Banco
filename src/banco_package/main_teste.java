@@ -27,14 +27,15 @@ public class main_teste {
 		
 		Banco bradesco = new Banco("bradesco"); 
 		bradesco.insereCliente(juse);
-		bradesco.insereConta(juse);
+		bradesco.criaConta(juse);
 		bradesco.insereCliente(arnaldo);
-		bradesco.insereConta(arnaldo);
-		bradesco.deposita(1, 10);
-		bradesco.saca(1, 2.51);
-		bradesco.transferencia(1, 2, 7.5);
+		bradesco.criaConta(arnaldo);
+		bradesco.deposita(1, 100);
+		bradesco.saca(1, 0);
+		bradesco.transferencia(1, 2, 75);
+		//bradesco.cobraTarifa();
 		
-		System.out.println(bradesco.saldoConta(2));
+		System.out.println(bradesco.saldoConta(1));
 		ArrayList<Conta> c = bradesco.getListaContas();
 		for(Conta m:c) {
 			System.out.println();

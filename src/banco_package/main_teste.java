@@ -30,16 +30,12 @@ public class main_teste {
 		bradesco.criaConta(juse);
 		bradesco.insereCliente(arnaldo);
 		bradesco.criaConta(arnaldo);
-		bradesco.deposita(1, 100);
-		bradesco.saca(1, 0);
-		bradesco.transferencia(1, 2, 75);
-		//bradesco.cobraTarifa();
+		bradesco.deposita(1, 100000);
+		bradesco.saca(1, 100);
+		bradesco.transferencia(1, 2, 100);
+		bradesco.cobraCPMF();
 		
 		System.out.println(bradesco.saldoConta(1));
-		ArrayList<Conta> c = bradesco.getListaContas();
-		for(Conta m:c) {
-			System.out.println();
-		}
 		
 //		int mYear = calendar.get(Calendar.YEAR);
 //		int mMonth = calendar.get(Calendar.MONTH);

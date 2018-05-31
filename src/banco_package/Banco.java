@@ -78,8 +78,8 @@ public class Banco {
 		Conta origem = this.procuraConta(numeroContaOrigem);
 		Conta destino = this.procuraConta(numeroContaDestino);
 		if(origem.getSaldo() >= valor) {
-			origem.debitaConta(valor, "Transferência para conta" + numeroContaDestino);
-			destino.creditaConta(valor, "Transferencia da conta" + numeroContaOrigem);
+			origem.debitaConta(valor, "Transferência para conta " + numeroContaDestino);
+			destino.creditaConta(valor, "Transferencia da conta " + numeroContaOrigem);
 		}
 		else {System.out.println("A conta de origem não possui saldo suficiente");}
 	}
@@ -88,6 +88,20 @@ public class Banco {
 			if(c.getSaldo() >= 15) {//So cobra 15 se a conta tiver saldo suficente
 				c.debitaConta(15, "Cobrança de Tarifa");
 			}
+		}
+	}
+	public void cobraCPMF() {
+		GregorianCalendar hoje = new GregorianCalendar();
+		GregorianCalendar semanaPassada = new GregorianCalendar();
+		semanaPassada.add((GregorianCalendar.DAY_OF_MONTH), -7);
+		for(Conta c : this.listaContas) {
+			double CPMF = 0;
+			for(Movimentacao m : c.extrato(semanaPassada, hoje)){
+				if(m.getDebitoCredito() == 'D') {
+					CPMF = CPMF + (0.0038*m.getValor());
+				}
+			}
+			c.debitaConta(CPMF, "Cobrança de CPMF");			
 		}
 	}
 	public double saldoConta(int numeroConta) {

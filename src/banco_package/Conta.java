@@ -47,8 +47,8 @@ public class Conta {
 	public void creditaConta(double valorCreditado, String descricaoMovimentacao) {
 		if(valorCreditado >= 0) {
 			Movimentacao nova_movimentacao = new Movimentacao(descricaoMovimentacao, 'C', valorCreditado);
-			listaMov.add(nova_movimentacao);
-			saldo += valorCreditado;
+			this.listaMov.add(nova_movimentacao);
+			this.saldo += valorCreditado;
 		}
 		else {
 			System.out.println("Movimentacao invalida");
@@ -69,12 +69,12 @@ public class Conta {
 	}
 	
 	public ArrayList<Movimentacao> extrato(GregorianCalendar dataInicial, GregorianCalendar dataFinal){
-			
+
 			ArrayList<Movimentacao> listaRetorno = new ArrayList<Movimentacao>();
 			
 			for(Movimentacao m: listaMov) {
 				//compareTo: positivo se no futuro em relação a dataInicial.
-				if( (m.getDataMov().compareTo(dataInicial)>=0) && (m.getDataMov().compareTo(dataFinal)<=0)) {
+				if( (m.getDataMov().compareTo(dataInicial)>=0) && (m.getDataMov().compareTo(dataFinal) <= 0)) {
 					listaRetorno.add(m);
 				}
 			}

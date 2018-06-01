@@ -32,7 +32,7 @@ public class Conta {
 		if(valor >= 0) {
 			Movimentacao Mov = new Movimentacao(descricao, 'D', valor);
 			double novo_saldo = this.saldo - valor;
-			if(novo_saldo > 0) {
+			if(novo_saldo >= 0) {
 				this.saldo = novo_saldo;
 				this.listaMov.add(Mov);
 			}

@@ -1,0 +1,73 @@
+------------CONTAS BANCÁRIAS-------------
+-----------------------------------------
+TOTAL DE CONTAS FEITAS
+4
+-----------------------------------------
+1
+Juse Silveira Pacheco
+99800.0
+09408756410
+Rua Jose Afonso
+3511-5264
+
+MOVIMENTACOES
+
+=====
+1/5/2018
+Deposito
+C
+100000.0
+=====
+1/5/2018
+Saque
+D
+100.0
+=====
+1/5/2018
+Transferência para conta 2
+D
+100.0
+------------------------------
+2
+Arnaldo Costa Machado
+100.0
+09087987709
+Rua Jose Afonso
+3441-5264
+
+MOVIMENTACOES
+
+=====
+1/5/2018
+Transferencia da conta 1
+C
+100.0
+------------------------------
+3
+Moisés Pedra Pinto
+400.0
+09839483210
+Rua Azevedo Carminda Bairro Kipoja
+99874-3029
+
+MOVIMENTACOES
+
+=====
+1/5/2018
+Deposito
+C
+400.0
+------------------------------
+-----------------------------------------
+CLIENTES SEM CONTA
+-----------------------------------------
+Josevaldo da Silva Pereira
+09389478820
+Av. Afonso Pena
+99487-4098
+-----------------------------------------
+João Pereira Silva Afonso
+73648695010
+Rua Fleming Bairro Centro
+97873-4937
+-----------------------------------------

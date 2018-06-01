@@ -1,12 +1,8 @@
 package banco_package;
 
-import static java.nio.file.StandardOpenOption.*;
-import java.nio.*;
-import java.nio.channels.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
-import java.nio.file.attribute.*;
 import java.io.*;
 import java.util.*;
 
@@ -19,12 +15,18 @@ public class Banco {
 		this.nomeBanco = nomeBanco;
 	}
 	private Conta procuraConta(int numeroConta) { //procura uma conta com base
-		for(Conta c : this.listaContas) {		  //no n�mero dela.
+		for(Conta c : this.listaContas) {		  //no número dela.
 			if(c.getNumConta() == numeroConta) {
 				return c;
 			}
 		}
 		return null;
+	}
+	private void carregarConta(Cliente cliente, String saldo, ArrayList<Movimentacao> lMov) { 
+		// Método exclusivo para o processo de leitura
+		Conta c = new Conta(cliente,saldo, lMov);
+		listaContas.add(c);
+		
 	}
 	public void insereCliente(Cliente cliente) {
 		this.listaClientes.add(cliente);
@@ -45,14 +47,14 @@ public class Banco {
 			if(cpfOuCnpj_Cliente.equals(cpfOuCnpj)) {	
 				//Conta de cliente que se deseja remover encontrada.
 				foundConta = true;
-				//Cliente n�o pode ser exclu�do com conta no banco.
-				System.out.println("Cliente possui uma conta no banco e por isso n�o ser� exclu�do.");
+				//Cliente não pode ser excluído com conta no banco.
+				System.out.println("Cliente possui uma conta no banco e por isso não será excluído.");
 				break;
 			}
 			
 		}
 		
-		// Se n�o achou a conta, deletar cliente.
+		// Se não achou a conta, deletar cliente.
 		if(!foundConta) {
 			
 			boolean foundCliente = false;
@@ -67,10 +69,10 @@ public class Banco {
 					break;
 				}
 			}
-			// Se n�o achou o cliente, avisar usu�rio que esse cliente
-			// n�o faz parte deste banco
+			// Se não achou o cliente, avisar usuário que esse cliente
+			// não faz parte deste banco
 			if(!foundCliente) {
-				System.out.println("Cliente n�o faz parte deste banco, logo n�o faz sentido exclu�-lo.");
+				System.out.println("Cliente não faz parte deste banco, logo não faz sentido excluí-lo.");
 				
 			}
 			
@@ -104,15 +106,15 @@ public class Banco {
 		Conta origem = this.procuraConta(numeroContaOrigem);
 		Conta destino = this.procuraConta(numeroContaDestino);
 		if(origem.getSaldo() >= valor) {
-			origem.debitaConta(valor, "Transfer�ncia para conta " + numeroContaDestino);
+			origem.debitaConta(valor, "Transferência para conta " + numeroContaDestino);
 			destino.creditaConta(valor, "Transferencia da conta " + numeroContaOrigem);
 		}
-		else {System.out.println("A conta de origem n�o possui saldo suficiente");}
+		else {System.out.println("A conta de origem não possui saldo suficiente");}
 	}
 	public void cobraTarifa() {
 		for(Conta c: this.listaContas) {
 			if(c.getSaldo() >= 15) {//So cobra 15 se a conta tiver saldo suficente
-				c.debitaConta(15, "Cobran�a de Tarifa");
+				c.debitaConta(15, "Cobrança de Tarifa");
 			}
 		}
 	}
@@ -131,7 +133,7 @@ public class Banco {
 				}
 			}
 			if(CPMF > 0)
-				c.debitaConta(CPMF, "Cobran�a de CPMF");			
+				c.debitaConta(CPMF, "Cobrança de CPMF");			
 		}
 	}
 	public double saldoConta(int numeroConta) {
@@ -157,22 +159,22 @@ public class Banco {
 		return this.listaContas;
 	}
 	public String getNomeBanco() {
-		//Adicionado para que o NomeBanco n�o seja perdido depois
+		//Adicionado para que o NomeBanco não seja perdido depois
 		//que seu valor for atribuido no construtor.
 		return nomeBanco;
 	}
-	public void gravarDadosArquivo() {
+	public void gravarDadosArquivo(String arquivo) {
 		
 		
 		List<String> lines = new ArrayList<>();
-		//Impress�o de contas
-		lines.add("------------CONTAS BANC�RIAS-------------");	
+		//Impressão de contas
+		lines.add("------------CONTAS BANCÁRIAS-------------");	
 		lines.add("-----------------------------------------");	
 		lines.add("TOTAL DE CONTAS FEITAS");
-		lines.add(String.valueOf(Conta.getNumeroDeContas()));
+		lines.add(String.valueOf(Conta.getNumeroDeContas()-1));
 		lines.add("-----------------------------------------");
 		
-		//Lista de clientes sem conta, que inicialmente � s� uma c�pia de listaClientes
+		//Lista de clientes sem conta, que inicialmente é só uma cópia de listaClientes
 		ArrayList<Cliente> listaClientesSemConta = new ArrayList<Cliente>(listaClientes);
 		
 		for(Conta contaI : listaContas) {
@@ -180,22 +182,27 @@ public class Banco {
 			//Cliente auxiliar
 			Cliente c = contaI.getCliente();
 			
-			//Impress�o de n�mero da conta
+			//Impressão de número da conta
 			int numConta = contaI.getNumConta();
 			lines.add(String.valueOf(numConta));
 			
-			//Impress�o do saldo
-			lines.add(String.valueOf(contaI.getSaldo()));
+
 			
 			
 			//Como sei que esse cliente tem uma conta, retiro ele da lista auxiliar
 			listaClientesSemConta.remove(c);
 			
-			//////////////Impress�o informa��es de cliente
+			//////////////Impressão informações de cliente/////////////////////
 			lines.add(c.getNomeCliente()); //Nome do cliente
+			//------------------------------------
+			//Impressão do saldo - NAO INCLUSO EM INFORMACOES DE CLIENTE
+			//EXCEÇÃO PARA MANTER ORGANIZAÇÃO NO ARQUIVO TEXTO
+			lines.add(String.valueOf(contaI.getSaldo()));
+			//------------------------------------
 			lines.add(c.getCpf_cnpj()); //CPF ou CNPJ
-			lines.add(c.getEndereco()); //Endere�o do cliente
+			lines.add(c.getEndereco()); //Endereço do cliente
 			lines.add(c.getFone()); //Telefone do clientes
+			///////////////////////////////////////////////////////////////////
 			
 			ArrayList<Movimentacao> listaMovCliente = contaI.getListaMov();
 			lines.add("");
@@ -208,6 +215,7 @@ public class Banco {
 				int mes = calendar.get(Calendar.MONTH);
 				int dia = calendar.get(Calendar.DAY_OF_MONTH);
 				lines.add(dia + "/" + mes + "/" + ano); // Data de movimentacao
+				lines.add(m.getDescricao()); //Descrição da movimentacao
 				lines.add(String.valueOf(m.getDebitoCredito())); // Credito ou debito
 				lines.add(String.valueOf(m.getValor())); //Valor da movimentacao
 			}
@@ -215,7 +223,7 @@ public class Banco {
 			lines.add("------------------------------");
 		}
 		
-		//Impress�o de clientes sem conta
+		//Impressão de clientes sem conta
 		lines.add("-----------------------------------------");
 		lines.add("CLIENTES SEM CONTA");
 		lines.add("-----------------------------------------");
@@ -223,7 +231,7 @@ public class Banco {
 			
 			lines.add(c.getNomeCliente()); //Nome do cliente
 			lines.add(c.getCpf_cnpj()); //CPF ou CNPJ
-			lines.add(c.getEndereco()); //Endere�o do cliente
+			lines.add(c.getEndereco()); //Endereço do cliente
 			lines.add(c.getFone()); //Telefone do cliente
 			
 			lines.add("-----------------------------------------");
@@ -232,7 +240,7 @@ public class Banco {
 		
 		Charset utf8 = StandardCharsets.UTF_8;
 		try {
-			Files.write(Paths.get("DadosBanco.txt"), lines, utf8);
+			Files.write(Paths.get(arquivo), lines, utf8);
 		    //Files.write(Paths.get("file6.txt"), lines, utf8,
 		    //        StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 		    
@@ -241,38 +249,246 @@ public class Banco {
 		}
 		
 	}
-	public void leituraDadosArquivo() {
+	public void leituraDadosArquivo(String arquivo) {
 		
-		Path path = Paths.get("DadosBanco.txt");
+		Path path = Paths.get(arquivo);
 		String FILENAME = String.valueOf(path);
 		BufferedReader br = null;
 		FileReader fr = null;
 
 		try {
 
-			//br = new BufferedReader(new FileReader(FILENAME));
 			fr = new FileReader(FILENAME);
 			br = new BufferedReader(fr);
 
 			String sCurrentLine;
+
 			int lineCounter = 0;
-			/*
-			String saldo = new String();
+
+			//Parametros de conta e cliente usados
 			String nome = new String();
 			String cpfOucnpj = new String();
 			String endereco = new String();
-			String telefone = new String();
-			*/
-			while ((sCurrentLine = br.readLine()) != null && !sCurrentLine.equals("CLIENTES SEM CONTA")) {
+			String fone = new String();
+			String saldo = new String();
+			
+			
+			boolean leituraPrimeirasLinhas = false;
+			boolean leituraContasCompleta = false;
+
+			
+			while(((sCurrentLine = br.readLine()) != null) && !leituraPrimeirasLinhas) {
+				
 				lineCounter++;
-				if(lineCounter >= 7) {
-					/*switch(lineCounter) {
-					case 7:
-						
-					}*/
+				if(lineCounter == 5) {
+					//Primeiras linhas lidas.
+					leituraPrimeirasLinhas = true;
 				}
-				//System.out.println(sCurrentLine);
 			}
+			if(sCurrentLine.startsWith("-")) {
+				
+				//Significa que nao tem nenhuma conta no banco
+				leituraContasCompleta = true;
+			}
+			else { // Há conta no banco.
+				//Leitura de Contas
+				boolean clienteComMovimentacoes = false;
+				boolean leituraInformacoesContaIndividual = false;
+				
+				 //Enquanto leitura das contas nao for terminada, continuar nesse loop
+				while(!leituraContasCompleta) {
+					
+					/////Garantir que condicoes depois do loop voltarao ao normal
+					int linesConta = 1;
+					/////numa nova leitura de conta
+					leituraInformacoesContaIndividual = false;
+					clienteComMovimentacoes = false;
+					/////
+					
+					//As informações da conta individual será feita nesse loop
+					while ((sCurrentLine = br.readLine()) != null && !leituraInformacoesContaIndividual) {
+	
+							linesConta++;
+							
+							switch(linesConta) {
+								case 2:
+									//grava nome
+									nome = sCurrentLine;
+									break;
+								case 3:
+									//grava saldo
+									saldo = sCurrentLine;
+									break;
+								case 4:
+									cpfOucnpj = sCurrentLine;
+									break;
+								case 5:
+									endereco = sCurrentLine;
+									break;
+								case 6:
+									fone = sCurrentLine;
+									break;
+								case 7:
+									//espaço em branco nessa linha
+									break;
+								case 8:
+									// escrito MOVIMENTACOES no arquivo
+									break;
+								case 9:
+									//espaço em branco nessa linha novamente
+									break;
+								case 10:
+									//Quando começa movimentações, se movimentações existe
+									//o primeiro caracter é =
+									if(sCurrentLine.startsWith("=")) {
+										clienteComMovimentacoes = true;
+									}else {
+										clienteComMovimentacoes = false;
+									}
+									leituraInformacoesContaIndividual = true;
+									//Terminado de ler a conta
+									break;
+								default:
+									linesConta = 0;
+							}
+					}//Terminado de ler informações da conta individual (fim de loop de leitura de informações de Conta)
+
+					
+					//Leitura de movimentacoes caso cliente tenha movimentacoes
+					ArrayList<Movimentacao> listaMovCliente = new ArrayList<Movimentacao>();
+					if(clienteComMovimentacoes) {
+						
+						int contadorMovimentacoes = 0;
+						boolean leituraMovimentacoesCompleta = false;
+						
+						//Parametros da movimentacao
+						GregorianCalendar calendar = new GregorianCalendar();
+						String descricao = new String();
+						char tipo = 0;
+						double valor =0;
+						// Loop continua enquanto a leitura de movimentacoes não está completa
+						 do {
+							contadorMovimentacoes ++;
+							
+
+							switch(contadorMovimentacoes) {
+								case 1:
+									//Data
+									String Data = new String();
+									Data = sCurrentLine;
+									String dia = Data.substring(0, Data.indexOf("/"));
+									String mes = Data.substring(Data.indexOf("/")+1, Data.indexOf("/",Data.indexOf("/")+1));
+									String ano = Data.substring(1+Data.indexOf("/",Data.indexOf("/")+1), Data.length());
+									calendar = new GregorianCalendar(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+									break;
+								case 2:
+									//Descricao da movimentacao
+									descricao = sCurrentLine;
+									break;
+								case 3:
+									//Tipo de movimentacao
+									tipo = sCurrentLine.charAt(0);
+									break;
+								case 4:
+									//Valor de movimentacao
+									valor = Double.parseDouble(sCurrentLine);
+									break;
+								case 5:
+									//Fim de primeira movimentacao
+									Movimentacao m = new Movimentacao(descricao, tipo, valor, calendar);
+									listaMovCliente.add(m);
+									if(sCurrentLine.startsWith("=")) {
+										contadorMovimentacoes = 0;
+										calendar = new GregorianCalendar();
+										descricao = new String();
+										tipo = 0;
+										valor =0;
+									}else {
+										leituraMovimentacoesCompleta = true;
+									}
+
+									break;
+									
+							}
+						} while ((sCurrentLine = br.readLine()) != null && !leituraMovimentacoesCompleta);
+					}
+
+					//Adicionar cliente e conta respectivas
+					Cliente c = new Cliente(nome, cpfOucnpj, endereco, fone);
+					insereCliente(c);
+					carregarConta(c, saldo, listaMovCliente);
+					
+					// Se essa próxima linha é ---- de novo, é indicacão que
+					// terminou a leitura de contas e começou a leitura de clientes sem conta
+					if(sCurrentLine.startsWith("-")) {
+						
+						leituraContasCompleta = true;
+					}
+				
+				} //Fim de loop de leitura de Contas
+				
+			}//Fim do if-else para leitura de contas(if para quando nao tem conta e else para quando tem)
+				
+			
+			
+			//Leitura de clientes sem conta
+			boolean leituraPrimeirasLinhas_ClientesSemConta = false;
+			boolean leituraClientes_semConta_completa = false;
+			int lineCounterSC = 0;
+			
+			while(((sCurrentLine = br.readLine()) != null) && !leituraPrimeirasLinhas_ClientesSemConta) {
+				
+				lineCounterSC++;
+				if(lineCounterSC == 1) {
+					//Primeiras linhas lidas.
+					leituraPrimeirasLinhas_ClientesSemConta = true;
+				}
+			}
+			if((sCurrentLine = br.readLine())==null) {
+				//Significa que nenhum cliente não tem conta neste banco.
+				leituraClientes_semConta_completa = true;
+			}else {
+				//Começa-se a leitura dos clientes sem conta
+				
+				while(!leituraClientes_semConta_completa) {
+					
+					int linesCliente = 0;
+					boolean leituraInformacoesClienteIndividual = false;
+					do {
+						linesCliente++;
+						switch(linesCliente) {
+							case 1:
+								nome = sCurrentLine;
+								break;
+							case 2:
+								cpfOucnpj = sCurrentLine;
+								break;
+							case 3:
+								endereco = sCurrentLine;
+								break;
+							case 4:
+								fone = sCurrentLine;
+								leituraInformacoesClienteIndividual = true;
+								break;
+							default:
+								linesCliente = 0;
+								
+						}//Fim do switch
+						
+						
+				}while ((sCurrentLine = br.readLine()) != null && !leituraInformacoesClienteIndividual);
+				//Fim do while para leitura de informações de um cliente INDIVIDUAL
+				
+					Cliente c = new Cliente(nome, cpfOucnpj, endereco, fone);
+					insereCliente(c);
+					
+
+				if((sCurrentLine = br.readLine()) == null) {
+					leituraClientes_semConta_completa = true;
+				}
+			}//Fim de TODAS as leituras de clientes sem conta
+			
+		}	
 
 		} catch (IOException e) {
 

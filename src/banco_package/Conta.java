@@ -16,6 +16,15 @@ public class Conta {
 		this.numConta = proximoNumConta;
 		proximoNumConta++;
 	}
+	Conta(Cliente cliente, String saldo,ArrayList<Movimentacao> listaM){
+		//Adicionado para poder carregar conta diretamente
+		//durante a leitura de arquivo
+		this.saldo = Double.parseDouble(saldo);
+		this.cliente = cliente;
+		this.numConta = proximoNumConta;
+		listaMov = new ArrayList<Movimentacao>(listaM);
+		proximoNumConta++;
+	}
 	public int getNumConta() {
 		return numConta;
 	}

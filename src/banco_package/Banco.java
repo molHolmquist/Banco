@@ -1,9 +1,14 @@
 package banco_package;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Iterator;
+import static java.nio.file.StandardOpenOption.*;
+import java.nio.*;
+import java.nio.channels.*;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
+import java.nio.file.attribute.*;
+import java.io.*;
+import java.util.*;
 
 public class Banco {
 	private String nomeBanco;
@@ -27,8 +32,7 @@ public class Banco {
 	public void criaConta(Cliente cliente) {
 		Conta c = new Conta(cliente);
 		this.listaContas.add(c);
-	}
-	
+	}	
 	public void excluiCliente(String cpfOuCnpj) {
 		
 		boolean foundConta = false;
@@ -73,8 +77,7 @@ public class Banco {
 		}
 		
 		
-	}
-	
+	}	
 	public void excluiConta(int numeroConta) {
 		for(Conta c : this.listaContas) {
 			if(c.getNumConta() == numeroConta) {
@@ -83,14 +86,14 @@ public class Banco {
 			}
 		}
 	}
-	public void deposita(int numeroConta, double valor) {
+	public void depositaConta(int numeroConta, double valor) {
 		for(Conta c: this.listaContas) {
 			if(c.getNumConta() == numeroConta) {
 				c.creditaConta(valor, "Deposito");//TODO t
 			}
 		}
 	}
-	public void saca(int numeroConta, double valor) {
+	public void saqueConta(int numeroConta, double valor) {
 		for(Conta c:this.listaContas) {
 			if(c.getNumConta() == numeroConta) {
 				c.debitaConta(valor, "Saque");
@@ -153,11 +156,78 @@ public class Banco {
 	public ArrayList<Conta> getListaContas(){
 		return this.listaContas;
 	}
-	
-	//Adicionado para que o NomeBanco não seja perdido depois
-	//que seu valor for atribuido no construtor.
 	public String getNomeBanco() {
+		//Adicionado para que o NomeBanco não seja perdido depois
+		//que seu valor for atribuido no construtor.
 		return nomeBanco;
 	}
-	
+	public void gravarDadosArquivo() {
+		
+		
+		List<String> lines = new ArrayList<>();
+		//Impressão de contas
+		lines.add("-----------------------------------------");
+		lines.add("---------------CONTAS--------------------");	
+		lines.add("-----------------------------------------");	
+		
+		
+		lines.add("TOTAL DE CONTAS FEITAS = " + Conta.getNumeroDeContas());
+		
+		//Lista de clientes sem conta, que inicialmente é só uma cópia de listaClientes
+		ArrayList<Cliente> listaClientesSemConta = new ArrayList<Cliente>(listaClientes);
+		
+		for(Conta contaI : listaContas) {
+			
+			//Cliente auxiliar
+			Cliente c = contaI.getCliente();
+			
+			//Impressão de número da conta
+			int numConta = contaI.getNumConta();
+			lines.add(String.valueOf(numConta));
+			
+			//Impressão do saldo
+			lines.add(String.valueOf(contaI.getSaldo()));
+			
+			//Como sei que esse cliente tem uma conta, retiro ele da lista auxiliar
+			listaClientesSemConta.remove(c);
+			
+			//////////////Impressão informações de cliente
+			lines.add(c.getNomeCliente()); //Nome do cliente
+			lines.add(c.getCpf_cnpj()); //CPF ou CNPJ
+			lines.add(c.getEndereco()); //Endereço do cliente
+			lines.add(c.getFone()); //Telefone do cliente
+			
+			lines.add("------------------------------");
+		}
+		
+		//Impressão de clientes sem conta
+		lines.add("-----------------------------------------");
+		lines.add("CLIENTES SEM CONTA");
+		lines.add("-----------------------------------------");
+		for(Cliente c : listaClientesSemConta) {
+			
+			lines.add(c.getNomeCliente()); //Nome do cliente
+			lines.add(c.getCpf_cnpj()); //CPF ou CNPJ
+			lines.add(c.getEndereco()); //Endereço do cliente
+			lines.add(c.getFone()); //Telefone do cliente
+			
+			lines.add("-----------------------------------------");
+			
+		}
+		
+		Charset utf8 = StandardCharsets.UTF_8;
+		try {
+			Files.write(Paths.get("DadosBanco.txt"), lines, utf8);
+		    //Files.write(Paths.get("file6.txt"), lines, utf8,
+		    //        StandardOpenOption.CREATE, StandardOpenOption.APPEND);
+		    
+		} catch (IOException e) {
+		    e.printStackTrace();
+		}
+		
+	}
+	public void leituraDadosArquivo() {
+		
+		
+	}
 }

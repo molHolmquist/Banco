@@ -1,48 +1,61 @@
 package banco_package;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 public class main_teste {
 
 	public static void main(String[] args) {
 		
-		Cliente juse = new Cliente("Juse","07320176610","Rua Jose Afonso","3241-5264");
-//		Conta contaJuse = new Conta(juse);
-//		contaJuse.creditaConta(50, "Valor recebido por loucura do juse.");
-//		contaJuse.creditaConta(300, "Vendeu a bicicleta.");
-//		contaJuse.creditaConta(5000, "Ganhou na loteria.");
-//		contaJuse.creditaConta(200, "Achou no chao.");
+		ArrayList<Cliente> listaC = new ArrayList<Cliente>();
 		
-		Cliente arnaldo = new Cliente("Arnaldo","09087987709","Rua Jose Afonso","3241-5264");
-//		Conta contaArnaldo = new Conta(arnaldo);
-//		contaArnaldo.creditaConta(100,  "Restaurante Boi dos Vales");
-//		contaArnaldo.creditaConta(50,  "Restaurante Boi dos Vales");
-//		contaArnaldo.creditaConta(20,  "Arroz");
-//		contaArnaldo.creditaConta(300,  "Batata");
-
-		GregorianCalendar calendar = new GregorianCalendar();
+		listaC.add(new Cliente("Juse Silveira Pacheco","09408756410","Rua Jose Afonso","3511-5264"));
+		listaC.add(new Cliente("Arnaldo Costa Machado","09087987709","Rua Jose Afonso","3441-5264"));
+		listaC.add(new Cliente("Josevaldo da Silva Pereira", "09389478820", "Av. Afonso Pena", "99487-4098"));
+		listaC.add(new Cliente("João Pereira Silva Afonso", "73648695010","Rua Fleming Bairro Centro", "97873-4937"));
+		listaC.add(new Cliente("Moisés Pedra Pinto", "09839483210", "Rua Azevedo Carminda Bairro Kipoja", "99874-3029"));
 		
-		Banco bradesco = new Banco("bradesco"); 
+		Cliente juse = new Cliente("Juse Silveira Pacheco","09408756410","Rua Jose Afonso","3511-5264");
+		Cliente arnaldo = new Cliente("Arnaldo Costa Machado","09087987709","Rua Jose Afonso","3241-5264");
+		Cliente josevaldo = new Cliente("Josevaldo da Silva Pereira", "09389478820", "Av. Afonso Pena", "99487-4098");
+		
+		Banco bradesco = new Banco("bradesco");
+		int i = 0;
+		for(Cliente c : listaC) {
+			i++;
+			if(i==3 || i==4) {
+				bradesco.insereCliente(c);
+				//bradesco.criaConta(c);
+			}else {
+				bradesco.insereCliente(c);
+				bradesco.criaConta(c);
+				
+			}
+			
+		}
+		bradesco.gravarDadosArquivo();
+		
+		/*
+		 
 		bradesco.insereCliente(juse);
 		bradesco.criaConta(juse);
 		//bradesco.insereCliente(arnaldo);
-		//bradesco.criaConta(arnaldo);
-		bradesco.deposita(1, 100000);
-		bradesco.saca(1, 100);
-		//bradesco.transferencia(1, 2, 100);
+		bradesco.criaConta(arnaldo);
+		bradesco.depositaConta(1, 100000);
+		bradesco.saqueConta(1, 100);
+		bradesco.transferencia(1, 2, 100);
 		bradesco.cobraCPMF();
 		
-		
-		bradesco.excluiCliente("09087987709");
-		
+				
 		for(Cliente c : bradesco.getListaCliente()) {
 			System.out.println(c.getNomeCliente());
 		}
 		
-		System.out.println(bradesco.saldoConta(1));
+		*/
+		//bradesco.excluiCliente("09087987709");
+
+		
+		//System.out.println(bradesco.saldoConta(1));
+		//bradesco.gravarDadosArquivo();
 		
 //		int mYear = calendar.get(Calendar.YEAR);
 //		int mMonth = calendar.get(Calendar.MONTH);

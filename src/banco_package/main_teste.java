@@ -14,25 +14,25 @@ public class main_teste {
 		listaC.add(new Cliente("João Pereira Silva Afonso", "73648695010","Rua Fleming Bairro Centro", "97873-4937"));
 		listaC.add(new Cliente("Moisés Pedra Pinto", "09839483210", "Rua Azevedo Carminda Bairro Kipoja", "99874-3029"));
 		
-		Cliente juse = new Cliente("Juse Silveira Pacheco","09408756410","Rua Jose Afonso","3511-5264");
-		Cliente arnaldo = new Cliente("Arnaldo Costa Machado","09087987709","Rua Jose Afonso","3241-5264");
-		Cliente josevaldo = new Cliente("Josevaldo da Silva Pereira", "09389478820", "Av. Afonso Pena", "99487-4098");
-		
 		Banco bradesco = new Banco("bradesco");
 		int i = 0;
 		for(Cliente c : listaC) {
 			i++;
-			if(i==3 || i==4) {
-				bradesco.insereCliente(c);
-				//bradesco.criaConta(c);
-			}else {
 				bradesco.insereCliente(c);
 				bradesco.criaConta(c);
-				
-			}
 			
 		}
+
+		
+		bradesco.depositaConta(1, 100000);		
+		bradesco.saqueConta(1, 100);
+		bradesco.depositaConta(3, 400);
+		bradesco.depositaConta(5, 700);
+		bradesco.transferencia(1, 2, 100);
+		bradesco.cobraCPMF();
 		bradesco.gravarDadosArquivo();
+		
+		//bradesco.leituraDadosArquivo();
 		
 		/*
 		 
@@ -40,10 +40,8 @@ public class main_teste {
 		bradesco.criaConta(juse);
 		//bradesco.insereCliente(arnaldo);
 		bradesco.criaConta(arnaldo);
-		bradesco.depositaConta(1, 100000);
-		bradesco.saqueConta(1, 100);
-		bradesco.transferencia(1, 2, 100);
-		bradesco.cobraCPMF();
+
+
 		
 				
 		for(Cliente c : bradesco.getListaCliente()) {

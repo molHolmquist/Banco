@@ -25,6 +25,9 @@ public class Conta {
 	public Cliente getCliente() {
 		return cliente;
 	}
+	public ArrayList<Movimentacao> getListaMov() {
+		return listaMov;
+	}
 	public static int getNumeroDeContas() {
 		return proximoNumConta;
 	}
@@ -100,6 +103,9 @@ public class Conta {
 		}
 		return extratoMes;
 	}
+	
+	
+
 	
 
 	

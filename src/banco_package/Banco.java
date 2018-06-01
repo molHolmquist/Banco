@@ -166,12 +166,11 @@ public class Banco {
 		
 		List<String> lines = new ArrayList<>();
 		//Impressão de contas
-		lines.add("-----------------------------------------");
-		lines.add("---------------CONTAS--------------------");	
+		lines.add("------------CONTAS BANCÁRIAS-------------");	
 		lines.add("-----------------------------------------");	
-		
-		
-		lines.add("TOTAL DE CONTAS FEITAS = " + Conta.getNumeroDeContas());
+		lines.add("TOTAL DE CONTAS FEITAS");
+		lines.add(String.valueOf(Conta.getNumeroDeContas()));
+		lines.add("-----------------------------------------");
 		
 		//Lista de clientes sem conta, que inicialmente é só uma cópia de listaClientes
 		ArrayList<Cliente> listaClientesSemConta = new ArrayList<Cliente>(listaClientes);
@@ -188,6 +187,7 @@ public class Banco {
 			//Impressão do saldo
 			lines.add(String.valueOf(contaI.getSaldo()));
 			
+			
 			//Como sei que esse cliente tem uma conta, retiro ele da lista auxiliar
 			listaClientesSemConta.remove(c);
 			
@@ -195,7 +195,22 @@ public class Banco {
 			lines.add(c.getNomeCliente()); //Nome do cliente
 			lines.add(c.getCpf_cnpj()); //CPF ou CNPJ
 			lines.add(c.getEndereco()); //Endereço do cliente
-			lines.add(c.getFone()); //Telefone do cliente
+			lines.add(c.getFone()); //Telefone do clientes
+			
+			ArrayList<Movimentacao> listaMovCliente = contaI.getListaMov();
+			lines.add("");
+			lines.add("MOVIMENTACOES");
+			lines.add("");
+			for(Movimentacao m : listaMovCliente) {
+				lines.add("=====");
+				GregorianCalendar calendar = m.getDataMov();
+				int ano = calendar.get(Calendar.YEAR);
+				int mes = calendar.get(Calendar.MONTH);
+				int dia = calendar.get(Calendar.DAY_OF_MONTH);
+				lines.add(dia + "/" + mes + "/" + ano); // Data de movimentacao
+				lines.add(String.valueOf(m.getDebitoCredito())); // Credito ou debito
+				lines.add(String.valueOf(m.getValor())); //Valor da movimentacao
+			}
 			
 			lines.add("------------------------------");
 		}
@@ -228,6 +243,57 @@ public class Banco {
 	}
 	public void leituraDadosArquivo() {
 		
+		Path path = Paths.get("DadosBanco.txt");
+		String FILENAME = String.valueOf(path);
+		BufferedReader br = null;
+		FileReader fr = null;
+
+		try {
+
+			//br = new BufferedReader(new FileReader(FILENAME));
+			fr = new FileReader(FILENAME);
+			br = new BufferedReader(fr);
+
+			String sCurrentLine;
+			int lineCounter = 0;
+			/*
+			String saldo = new String();
+			String nome = new String();
+			String cpfOucnpj = new String();
+			String endereco = new String();
+			String telefone = new String();
+			*/
+			while ((sCurrentLine = br.readLine()) != null && !sCurrentLine.equals("CLIENTES SEM CONTA")) {
+				lineCounter++;
+				if(lineCounter >= 7) {
+					/*switch(lineCounter) {
+					case 7:
+						
+					}*/
+				}
+				//System.out.println(sCurrentLine);
+			}
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		} finally {
+
+			try {
+
+				if (br != null)
+					br.close();
+
+				if (fr != null)
+					fr.close();
+
+			} catch (IOException ex) {
+
+				ex.printStackTrace();
+
+			}
+		}
 		
 	}
 }

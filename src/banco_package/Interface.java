@@ -288,27 +288,21 @@ public class Interface {
 		    	efetuarTransferencia();
 		    	break;
 		    case "8":
-		    	//TODO COBRAR TARIFA
 		    	cobraTarifa();
 		    	break;
 		    case "9":
-		    	// TODO COBRAR CPMF
 		    	cobraCPMF();
 		    	break;
 		    case "10":
-		    	// TODO OBTER SALDO
 		    	obtemSaldo();
 		    	break;
 		    case "11":
-		    	// TODO OBTER EXTRATO
 		    	obtemExtrato();
 		    	break;
 		    case "12":
-		    	//LISTAR CLIENTES
 		    	listarClientes();
 		    	break;
 		    case "13":
-		    	//LISTAR CONTAS
 		    	listarContas();
 		    	break;
 		    case "q":

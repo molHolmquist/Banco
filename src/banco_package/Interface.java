@@ -1,5 +1,6 @@
 package banco_package;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -101,52 +102,66 @@ public class Interface {
 		menu();
 	}
 	private void imprimeExtrato(ArrayList<Movimentacao> extrato) {
+	
 		for(Movimentacao mov : extrato) {
-			System.out.println("Data:"+mov.getDataMov().getTime());
+			
+			SimpleDateFormat fmt = new SimpleDateFormat("dd-MMM-yyyy");
+		    fmt.setCalendar(mov.getDataMov());
+		    String dateFormatted = fmt.format(mov.getDataMov().getTime());
+		    
+			System.out.println("Data:"+dateFormatted);
 			System.out.println("Descrição:"+mov.getDescricao());
 			System.out.println("Debito ou crédito:"+mov.getDebitoCredito());
 			System.out.println("Valor:"+mov.getValor());
+			System.out.println("====================");
 		}
 	}
 	public void obtemExtrato() {
 			Scanner scan = new Scanner(System.in);
 			System.out.println("Digite o número da conta:");
-			int numeroConta = scan.nextInt();
-			System.out.println("Digite o número equivalente ao extrato que desjea:");
+			String SnumeroConta = scan.nextLine();
+			int numeroConta = Integer.parseInt(SnumeroConta);
+			System.out.println("Digite o número equivalente ao extrato que deseja:");
 			System.out.println("1- Extrato do mês");
 			System.out.println("2- Extrato a partir de uma data");
 			System.out.println("3- Extrato de um período específico");
-			int n = scan.nextInt();
+			System.out.println();
+			String s = scan.nextLine();
 			String dia = null; String mes = null; String ano = null;
 			GregorianCalendar dataInicial = null;
 			String Data = new String();
-			switch (n) {
-			case 1 : imprimeExtrato(this.banco.extratoConta(numeroConta));
-				break;
-			case 2: System.out.println("Digite a data inicial no formato d/m/aaaa:");
-				Data = scan.nextLine();
-				dia = Data.substring(0, Data.indexOf("/"));
-				mes = Data.substring(Data.indexOf("/")+1, Data.indexOf("/",Data.indexOf("/")+1));
-				ano = Data.substring(1+Data.indexOf("/",Data.indexOf("/")+1), Data.length());
-				dataInicial = new GregorianCalendar(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-				this.imprimeExtrato(this.banco.extratoConta(numeroConta, dataInicial));
-				break;
-			case 3: System.out.println("Digite a data inicial no formato d/m/aaaa:");
-				Data = scan.nextLine();
-				dia = Data.substring(0, Data.indexOf("/"));
-				mes = Data.substring(Data.indexOf("/")+1, Data.indexOf("/",Data.indexOf("/")+1));
-				ano = Data.substring(1+Data.indexOf("/",Data.indexOf("/")+1), Data.length());
-				dataInicial = new GregorianCalendar(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-				System.out.println("Digite a data final no formato d/m/aaaa:");
-				Data = scan.nextLine();
-				dia = Data.substring(0, Data.indexOf("/"));
-				mes = Data.substring(Data.indexOf("/")+1, Data.indexOf("/",Data.indexOf("/")+1));
-				ano = Data.substring(1+Data.indexOf("/",Data.indexOf("/")+1), Data.length());
-				GregorianCalendar dataFinal = new GregorianCalendar(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
-				this.imprimeExtrato(this.banco.extratoConta(numeroConta, dataInicial, dataFinal));
-				break;
-			default: System.out.println("Valor inválido");
-			break;
+			switch (s) {
+				case "1" :
+					System.out.println("EXTRATO DO MÊS");
+					imprimeExtrato(this.banco.extratoConta(numeroConta));
+					break;
+				case "2": 
+					System.out.println("Digite a data inicial no formato d/m/aaaa:");
+					Data = scan.nextLine();
+					dia = Data.substring(0, Data.indexOf("/"));
+					mes = Data.substring(Data.indexOf("/")+1, Data.indexOf("/",Data.indexOf("/")+1));
+					ano = Data.substring(1+Data.indexOf("/",Data.indexOf("/")+1), Data.length());
+					System.out.println(dia + " " + mes + " " + ano);
+					dataInicial = new GregorianCalendar(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+					this.imprimeExtrato(this.banco.extratoConta(numeroConta, dataInicial));
+					break;
+				case "3": 
+					System.out.println("Digite a data inicial no formato d/m/aaaa:");
+					Data = scan.nextLine();
+					dia = Data.substring(0, Data.indexOf("/"));
+					mes = Data.substring(Data.indexOf("/")+1, Data.indexOf("/",Data.indexOf("/")+1));
+					ano = Data.substring(1+Data.indexOf("/",Data.indexOf("/")+1), Data.length());
+					dataInicial = new GregorianCalendar(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+					System.out.println("Digite a data final no formato d/m/aaaa:");
+					Data = scan.nextLine();
+					dia = Data.substring(0, Data.indexOf("/"));
+					mes = Data.substring(Data.indexOf("/")+1, Data.indexOf("/",Data.indexOf("/")+1));
+					ano = Data.substring(1+Data.indexOf("/",Data.indexOf("/")+1), Data.length());
+					GregorianCalendar dataFinal = new GregorianCalendar(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+					this.imprimeExtrato(this.banco.extratoConta(numeroConta, dataInicial, dataFinal));
+					break;
+				default:
+					System.out.println("Valor inválido");
 				} 		
 		menu();
 	}
@@ -288,21 +303,27 @@ public class Interface {
 		    	efetuarTransferencia();
 		    	break;
 		    case "8":
+		    	//TODO COBRAR TARIFA
 		    	cobraTarifa();
 		    	break;
 		    case "9":
+		    	// TODO COBRAR CPMF
 		    	cobraCPMF();
 		    	break;
 		    case "10":
+		    	// TODO OBTER SALDO
 		    	obtemSaldo();
 		    	break;
 		    case "11":
+		    	// TODO OBTER EXTRATO
 		    	obtemExtrato();
 		    	break;
 		    case "12":
+		    	//LISTAR CLIENTES
 		    	listarClientes();
 		    	break;
 		    case "13":
+		    	//LISTAR CONTAS
 		    	listarContas();
 		    	break;
 		    case "q":

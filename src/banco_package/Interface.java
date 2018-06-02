@@ -3,7 +3,13 @@ import java.util.Scanner;
 
 public class Interface {
 	
+	public Banco banco;
 	//TODO tornar banco private
+	
+	Interface(Banco b){
+		banco = b;
+	}
+	
 	public void cadastraCliente() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Insira o nome do Cliente:");

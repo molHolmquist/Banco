@@ -8,8 +8,8 @@ public class main_teste {
 		
 		//ArrayList<Cliente> listaC = new ArrayList<Cliente>();
 		Banco bradesco = new Banco("bradesco");
-		bradesco.leituraDadosArquivo("RESULTADO.txt");
-		bradesco.gravarDadosArquivo("RESULTADO2.txt");
+//		bradesco.leituraDadosArquivo("RESULTADO.txt");
+//		bradesco.gravarDadosArquivo("RESULTADO2.txt");
 	/*
 		listaC.add(new Cliente("Juse Silveira Pacheco","09408756410","Rua Jose Afonso","3511-5264"));
 		listaC.add(new Cliente("Arnaldo Costa Machado","09087987709","Rua Jose Afonso","3441-5264"));
@@ -85,13 +85,14 @@ public class main_teste {
 		Interface banquinho = new Interface();
 		banquinho.cadastraCliente();
 		banquinho.cadastraCliente();
-		banquinho.excluiCliente();
-		for(Cliente c: banquinho.banco.getListaCliente()) {
-			System.out.println("nome dele �:"+c.getNomeCliente());
-			System.out.println("cpf dele �:"+c.getCpf_cnpj());
-			System.out.println("endereco dele �:"+c.getEndereco());
-			System.out.println("telegone dele �:"+c.getFone());
-		}
+		banquinho.criaConta();
+//		for(Cliente c: banquinho.banco.getListaCliente()) {
+//			System.out.println("nome dele �:"+c.getNomeCliente());
+//			System.out.println("cpf dele �:"+c.getCpf_cnpj());
+//			System.out.println("endereco dele �:"+c.getEndereco());
+//			System.out.println("telegone dele �:"+c.getFone());
+//		}
+		banquinho.banco.gravarDadosArquivo("bancotop.txt");
 		
 	}
 

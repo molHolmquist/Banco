@@ -3,9 +3,7 @@ import java.util.Scanner;
 
 public class Interface {
 	
-	public Banco banco = new Banco("nome a ser extraido de um arquivo");
 	//TODO tornar banco private
-	
 	public void cadastraCliente() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Insira o nome do Cliente:");
@@ -20,14 +18,14 @@ public class Interface {
 		this.banco.insereCliente(cliente);
 	}
 	public void excluiCliente() {
-		System.out.println("Os clientes existentes são:");
+		System.out.println("Os clientes existentes sï¿½o:");
 		int i = 1;
 		for(Cliente c : this.banco.getListaCliente()) { //Mostra todos os clientes
 			System.out.println(i+"-"+c.getNomeCliente()+"-"+c.getCpf_cnpj());
 			i++;
 		}
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Qual você deseja exlcuir?");
+		System.out.println("Qual vocï¿½ deseja exlcuir?");
 		int n = scan.nextInt();
 		if(n <= i && n > 0) {
 			i = 1;
@@ -44,14 +42,14 @@ public class Interface {
 		
 	}
 	public void criaConta() {
-		System.out.println("Os clientes existentes são:");
+		System.out.println("Os clientes existentes sï¿½o:");
 		int i = 1;
 		for(Cliente c : this.banco.getListaCliente()) { //Mostra todos os clientes
 			System.out.println(i+"-"+c.getNomeCliente()+"-"+c.getCpf_cnpj());
 			i++;
 		}
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Digite o número do cliente para o qual deseja criar a conta:");
+		System.out.println("Digite o nï¿½mero do cliente para o qual deseja criar a conta:");
 		int n = scan.nextInt();
 		if(n <= i && n > 0) {
 			i = 1;
@@ -68,7 +66,7 @@ public class Interface {
 	}
 	public void excluiConta() {
 		Scanner scan = new Scanner(System.in);
-		System.out.println("Digite o número da conta a ser excluída:");
+		System.out.println("Digite o nï¿½mero da conta a ser excluï¿½da:");
 		int numeroConta = scan.nextInt();
 		boolean notFound = true;
 		for(Conta c : this.banco.getListaContas()) {

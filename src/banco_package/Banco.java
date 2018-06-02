@@ -163,8 +163,9 @@ public class Banco {
 		//que seu valor for atribuido no construtor.
 		return nomeBanco;
 	}
-	public void gravarDadosArquivo(String arquivo) {
+	public void gravarDadosArquivo() {
 		
+		String nomeArquivo = new String(nomeBanco + ".txt");
 		
 		List<String> lines = new ArrayList<>();
 		//Impressão de contas
@@ -240,7 +241,7 @@ public class Banco {
 		
 		Charset utf8 = StandardCharsets.UTF_8;
 		try {
-			Files.write(Paths.get(arquivo), lines, utf8);
+			Files.write(Paths.get(nomeArquivo), lines, utf8);
 		    //Files.write(Paths.get("file6.txt"), lines, utf8,
 		    //        StandardOpenOption.CREATE, StandardOpenOption.APPEND);
 		    
@@ -249,9 +250,11 @@ public class Banco {
 		}
 		
 	}
-	public void leituraDadosArquivo(String arquivo) {
+	public void leituraDadosArquivo() {
 		
-		Path path = Paths.get(arquivo);
+		String nomeArquivo = new String(nomeBanco + ".txt");
+		
+		Path path = Paths.get(nomeArquivo);
 		String FILENAME = String.valueOf(path);
 		BufferedReader br = null;
 		FileReader fr = null;

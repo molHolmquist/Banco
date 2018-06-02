@@ -3,7 +3,7 @@ package banco_package;
 import java.util.ArrayList;
 
 public class main_teste {
-
+/*
 	public static void main(String[] args) {
 		
 		//ArrayList<Cliente> listaC = new ArrayList<Cliente>();
@@ -81,7 +81,9 @@ public class main_teste {
 //		    String dateFormatted = fmt.format(m.getDataMov().getTime());
 //			System.out.println(m.getDescricao() + "-mes:"+ " " + dateFormatted);
 //			
-//		}
+//	}
+	
+/*	
 		Interface banquinho = new Interface();
 		banquinho.cadastraCliente();
 		banquinho.cadastraCliente();
@@ -95,5 +97,5 @@ public class main_teste {
 		banquinho.banco.gravarDadosArquivo("bancotop.txt");
 		
 	}
-
+*/
 }

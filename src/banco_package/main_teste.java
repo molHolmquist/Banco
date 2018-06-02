@@ -6,7 +6,6 @@ public class main_teste {
 
 	public static void main(String[] args) {
 		
-<<<<<<< HEAD
 		//ArrayList<Cliente> listaC = new ArrayList<Cliente>();
 		Banco bradesco = new Banco("bradesco");
 		bradesco.leituraDadosArquivo("RESULTADO.txt");
@@ -45,35 +44,6 @@ public class main_teste {
 		
 		//bradesco.leituraDadosArquivo();
 
-		
-=======
-		ArrayList<Cliente> listaC = new ArrayList<Cliente>();
-		
-//		listaC.add(new Cliente("Juse Silveira Pacheco","09408756410","Rua Jose Afonso","3511-5264"));
-//		listaC.add(new Cliente("Arnaldo Costa Machado","09087987709","Rua Jose Afonso","3441-5264"));
-//		listaC.add(new Cliente("Josevaldo da Silva Pereira", "09389478820", "Av. Afonso Pena", "99487-4098"));
-//		listaC.add(new Cliente("João Pereira Silva Afonso", "73648695010","Rua Fleming Bairro Centro", "97873-4937"));
-//		listaC.add(new Cliente("Moisés Pedra Pinto", "09839483210", "Rua Azevedo Carminda Bairro Kipoja", "99874-3029"));
-//		
-//		Banco bradesco = new Banco("bradesco");
-//		int i = 0;
-//		for(Cliente c : listaC) {
-//			i++;
-//				bradesco.insereCliente(c);
-//				bradesco.criaConta(c);
-//			
-//		}
-//
-//		
-//		bradesco.depositaConta(1, 100000);		
-//		bradesco.saqueConta(1, 100);
-//		bradesco.depositaConta(3, 400);
-//		bradesco.depositaConta(5, 700);
-//		bradesco.transferencia(1, 2, 100);
-//		bradesco.cobraCPMF();
-//		bradesco.gravarDadosArquivo();
-//		
->>>>>>> Interface_Davi
 		//bradesco.leituraDadosArquivo();
 		
 		/*
@@ -117,10 +87,10 @@ public class main_teste {
 		banquinho.cadastraCliente();
 		banquinho.excluiCliente();
 		for(Cliente c: banquinho.banco.getListaCliente()) {
-			System.out.println("nome dele é:"+c.getNomeCliente());
-			System.out.println("cpf dele é:"+c.getCpf_cnpj());
-			System.out.println("endereco dele é:"+c.getEndereco());
-			System.out.println("telegone dele é:"+c.getFone());
+			System.out.println("nome dele ï¿½:"+c.getNomeCliente());
+			System.out.println("cpf dele ï¿½:"+c.getCpf_cnpj());
+			System.out.println("endereco dele ï¿½:"+c.getEndereco());
+			System.out.println("telegone dele ï¿½:"+c.getFone());
 		}
 		
 	}

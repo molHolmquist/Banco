@@ -1,10 +1,8 @@
 package banco_package;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
+
 import java.util.Scanner;
 
 public class Interface {
@@ -14,9 +12,6 @@ public class Interface {
 	
 	Interface(Banco b){
 		banco = b;
-	}
-	public void menu() {
-		
 	}
 	public void cadastraCliente() {
 		Scanner scan = new Scanner(System.in);
@@ -155,4 +150,192 @@ public class Interface {
 				} 		
 		menu();
 	}
+	public void efetuarDeposito() {
+		
+		Scanner scan = null;
+	    scan = new Scanner(System.in);
+	    System.out.println("Insira o número da conta:");
+	    String num_Conta = scan.nextLine();
+	    System.out.println("Insira o valor que se deseja depositar:");
+	    String valor = scan.nextLine();
+	    banco.depositaConta(Integer.parseInt(num_Conta), Double.parseDouble(valor));
+	    System.out.println("Depósito realizado.");
+
+		menu();
+		
+	}
+	public void efetuarSaque() {
+		
+		Scanner scan = null;
+	    scan = new Scanner(System.in);
+	    System.out.println("Insira o número da conta:");
+	    String num_Conta = scan.nextLine();
+	    System.out.println("Insira o valor que se deseja sacar:");
+	    String valor = scan.nextLine();
+	    banco.saqueConta(Integer.parseInt(num_Conta), Double.parseDouble(valor));
+	    System.out.println("Saque realizado.");
+		menu();
+	}
+	
+	public void efetuarTransferencia() {
+		
+		Scanner scan = null;
+	    scan = new Scanner(System.in);
+	    System.out.println("Insira o número da conta de origem para transferência:");
+	    String num_Conta1 = scan.nextLine();
+	    System.out.println("Insira o número da conta destino:");
+	    String num_Conta2 = scan.nextLine();
+	    System.out.println("Insira o valor da transferência:");
+	    String valor = scan.nextLine();
+	    banco.transferencia(Integer.parseInt(num_Conta1), Integer.parseInt(num_Conta2), Double.parseDouble(valor));
+	    System.out.println("Transferência realizada.");
+		menu();
+		
+	}
+	
+	public void listarClientes() {
+		
+		ArrayList<Cliente> listaClientes = banco.getListaCliente();
+		
+		System.out.println("LISTA DE CLIENTES");
+		
+		for(Cliente c: listaClientes) {
+			String nome = c.getNomeCliente();
+			String cpf_cnpj = c.getCpf_cnpj();
+			String endereco = c.getEndereco();
+			String fone = c.getFone();
+			System.out.println("-----------------------------");
+			System.out.println(nome);
+			System.out.println(cpf_cnpj);
+			System.out.println(endereco);
+			System.out.println(fone);
+		}
+		
+		menu();
+		
+	}
+	
+	public void listarContas() {
+		
+		ArrayList<Conta> listaContas = banco.getListaContas();
+		
+		System.out.println("LISTA DE CONTAS");
+		
+		for(Conta c: listaContas) {
+			
+			int numConta = c.getNumConta();
+			double saldo = c.getSaldo();
+			System.out.println("-----------------------------");
+			System.out.println("Número de conta: " + numConta);
+			System.out.println("Saldo: " + saldo);
+
+		}
+		
+		menu();
+		
+	}
+	
+	public void menu() {
+		
+		Scanner scan = null;
+		try {
+			scan = new Scanner(System.in);
+			if(menuAberto != 0) {
+				System.out.println();
+			    System.out.println("Aperte enter para voltar ao menu");
+			    String a = scan.nextLine();
+			}
+		    menuAberto++;
+			jumpSpace();
+			System.out.println("----------MENU----------");
+			System.out.println("1: Cadastrar novo cliente");
+			System.out.println("2: Criar nova conta");
+			System.out.println("3: Excluir um cliente");
+			System.out.println("4: Excluir uma conta");
+			System.out.println("5: Efetuar depósito");
+			System.out.println("6: Efetuar saque");
+			System.out.println("7: Efetuar transferência entre contas");
+			System.out.println("8: Cobrar tarifa");
+			System.out.println("9: Cobrar CPMF");
+			System.out.println("10: Obter saldo");
+			System.out.println("11: Obter extrato");
+			System.out.println("12: Listar clientes");
+			System.out.println("13: Listar contas");
+			System.out.println("q : Sair do programa");
+
+
+		    String s = scan.nextLine();
+		    switch(s) {
+		    case "1":
+		    	cadastraCliente();
+		    	break;
+		    case "2":
+		    	criaConta();
+		    	break;
+		    case "3":
+		    	excluiCliente();
+		    	break;
+		    case "4":
+		    	excluiConta();
+		    	break;
+		    case "5":
+		    	efetuarDeposito();
+		    	break;
+		    case "6":
+		    	efetuarSaque();
+		    	break;
+		    case "7":
+		    	efetuarTransferencia();
+		    	break;
+		    case "8":
+		    	//TODO COBRAR TARIFA
+		    	cobraTarifa();
+		    	break;
+		    case "9":
+		    	// TODO COBRAR CPMF
+		    	cobraCPMF();
+		    	break;
+		    case "10":
+		    	// TODO OBTER SALDO
+		    	obtemSaldo();
+		    	break;
+		    case "11":
+		    	// TODO OBTER EXTRATO
+		    	obtemExtrato();
+		    	break;
+		    case "12":
+		    	//LISTAR CLIENTES
+		    	listarClientes();
+		    	break;
+		    case "13":
+		    	//LISTAR CONTAS
+		    	listarContas();
+		    	break;
+		    case "q":
+		    	//Apenas sai do menu
+		    	banco.gravarDadosArquivo();
+		    	break;
+		    default:
+		    	System.out.println("Entrada inválida. Digite um valor entre 1 e 13, ou então saia do programa e grave os dados com q.");
+		    	menu();
+		    	//throw new IllegalArgumentException("Função inválida. Digite um valor entre 1 e 13, ou então saia do programa com q.");
+		    
+		    }
+		}
+		finally {
+		    if(scan!=null)
+		        scan.close();
+		}
+		
+	}
+	
+	private void jumpSpace() {
+		for (int i = 0; i < 3; ++i)  
+		       System.out.println();
+	}
+	
+	private static int menuAberto = 0;
+
+
+
 }

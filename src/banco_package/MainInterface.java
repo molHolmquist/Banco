@@ -9,9 +9,10 @@ public class MainInterface {
 		bradesco.leituraDadosArquivo();
 	
 		Interface banquinho = new Interface(bradesco);
-		banquinho.cadastraCliente();
-		banquinho.cadastraCliente();
-		banquinho.criaConta();
+		banquinho.menu();
+//		banquinho.cadastraCliente();
+//		banquinho.cadastraCliente();
+//		banquinho.criaConta();
 //		for(Cliente c: banquinho.banco.getListaCliente()) {
 //			System.out.println("nome dele �:"+c.getNomeCliente());
 //			System.out.println("cpf dele �:"+c.getCpf_cnpj());

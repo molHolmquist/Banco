@@ -114,6 +114,8 @@ public class main_teste {
 //		}
 		Interface banquinho = new Interface();
 		banquinho.cadastraCliente();
+		banquinho.cadastraCliente();
+		banquinho.excluiCliente();
 		for(Cliente c: banquinho.banco.getListaCliente()) {
 			System.out.println("nome dele é:"+c.getNomeCliente());
 			System.out.println("cpf dele é:"+c.getCpf_cnpj());

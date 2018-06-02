@@ -23,7 +23,7 @@ public class Interface {
 		System.out.println("Os clientes existentes são:");
 		int i = 1;
 		for(Cliente c : this.banco.getListaCliente()) { //Mostra todos os clientes
-			System.out.println(i+"-"+c.getNomeCliente()+c.getCpf_cnpj());
+			System.out.println(i+"-"+c.getNomeCliente()+"-"+c.getCpf_cnpj());
 			i++;
 		}
 		Scanner scan = new Scanner(System.in);
@@ -32,8 +32,9 @@ public class Interface {
 		if(n <= i && n > 0) {
 			i = 1;
 			for(Cliente c : this.banco.getListaCliente()) {
-				if( i == n) {
-					this.banco.excluiCliente(c.getNomeCliente());
+				if(i == n) {
+					this.banco.excluiCliente(c.getCpf_cnpj());
+					break;
 				}
 				i++;
 			}

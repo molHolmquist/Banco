@@ -22,14 +22,14 @@ public class Interface {
 		//TODO testar
 		System.out.println("Os clientes existentes são:");
 		int i = 1;
-		for(Cliente c : this.banco.getListaCliente()) {
+		for(Cliente c : this.banco.getListaCliente()) { //Mostra todos os clientes
 			System.out.println(i+"-"+c.getNomeCliente()+c.getCpf_cnpj());
 			i++;
 		}
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Qual você deseja exlcuir?");
 		int n = scan.nextInt();
-		if(n <= i || n > 0) {
+		if(n <= i && n > 0) {
 			i = 1;
 			for(Cliente c : this.banco.getListaCliente()) {
 				if( i == n) {

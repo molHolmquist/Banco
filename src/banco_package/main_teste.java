@@ -1,23 +1,25 @@
 package banco_package;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class main_teste {
-/*
+
 	public static void main(String[] args) {
-		
-		//ArrayList<Cliente> listaC = new ArrayList<Cliente>();
-		Banco bradesco = new Banco("bradesco");
+		/*
+		ArrayList<Cliente> listaC = new ArrayList<Cliente>();
+//		Banco bradesco = new Banco("bradesco");
 //		bradesco.leituraDadosArquivo("RESULTADO.txt");
 //		bradesco.gravarDadosArquivo("RESULTADO2.txt");
-	/*
+	
 		listaC.add(new Cliente("Juse Silveira Pacheco","09408756410","Rua Jose Afonso","3511-5264"));
 		listaC.add(new Cliente("Arnaldo Costa Machado","09087987709","Rua Jose Afonso","3441-5264"));
 		listaC.add(new Cliente("Josevaldo da Silva Pereira", "09389478820", "Av. Afonso Pena", "99487-4098"));
 		listaC.add(new Cliente("João Pereira Silva Afonso", "73648695010","Rua Fleming Bairro Centro", "97873-4937"));
 		listaC.add(new Cliente("Moisés Pedra Pinto", "09839483210", "Rua Azevedo Carminda Bairro Kipoja", "99874-3029"));
 		
-		Banco bradesco = new Banco("bradesco");
+		Banco bradesco = new Banco("TESTES");
 		int i = 0;
 		for(Cliente c : listaC) {
 			i++;
@@ -31,6 +33,14 @@ public class main_teste {
 			
 		}
 
+		GregorianCalendar calendar = new GregorianCalendar();
+		int ano = calendar.get(Calendar.YEAR);
+		int mes = calendar.get(Calendar.MONTH);
+		int dia = calendar.get(Calendar.DAY_OF_MONTH);
+		
+		System.out.println(dia+" "+mes + " "+ano);
+		
+		
 		
 		bradesco.depositaConta(1, 100000);		
 		bradesco.saqueConta(1, 100);
@@ -38,9 +48,12 @@ public class main_teste {
 		bradesco.depositaConta(5, 700);
 		bradesco.transferencia(1, 2, 100);
 		bradesco.cobraCPMF();
-		bradesco.gravarDadosArquivo("DadosResultadoTESTE.txt");
-
 		
+		*/
+		Banco bradesco = new Banco("TESTES");
+		bradesco.leituraDadosArquivo();
+
+	}
 		
 		//bradesco.leituraDadosArquivo();
 

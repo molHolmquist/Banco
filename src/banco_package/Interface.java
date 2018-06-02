@@ -104,14 +104,18 @@ public class Interface {
 	private void imprimeExtrato(ArrayList<Movimentacao> extrato) {
 	
 		for(Movimentacao mov : extrato) {
-			
+			System.out.println();
 			SimpleDateFormat fmt = new SimpleDateFormat("dd-MMM-yyyy");
 		    fmt.setCalendar(mov.getDataMov());
 		    String dateFormatted = fmt.format(mov.getDataMov().getTime());
 		    
 			System.out.println("Data:"+dateFormatted);
 			System.out.println("Descrição:"+mov.getDescricao());
-			System.out.println("Debito ou crédito:"+mov.getDebitoCredito());
+			if(mov.getDebitoCredito()=='C') {
+				System.out.println("Conta creditada");
+			} else if(mov.getDebitoCredito()=='D'){
+				System.out.println("Conta debitada");
+			}
 			System.out.println("Valor:"+mov.getValor());
 			System.out.println("====================");
 		}
@@ -132,6 +136,8 @@ public class Interface {
 			String Data = new String();
 			switch (s) {
 				case "1" :
+					System.out.println();
+					System.out.println("-----------------------------");
 					System.out.println("EXTRATO DO MÊS");
 					imprimeExtrato(this.banco.extratoConta(numeroConta));
 					break;
@@ -141,8 +147,10 @@ public class Interface {
 					dia = Data.substring(0, Data.indexOf("/"));
 					mes = Data.substring(Data.indexOf("/")+1, Data.indexOf("/",Data.indexOf("/")+1));
 					ano = Data.substring(1+Data.indexOf("/",Data.indexOf("/")+1), Data.length());
-					System.out.println(dia + " " + mes + " " + ano);
-					dataInicial = new GregorianCalendar(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+					dataInicial = new GregorianCalendar(Integer.parseInt(ano), Integer.parseInt(mes)-1, Integer.parseInt(dia));
+					System.out.println();
+					System.out.println("-----------------------------");
+					System.out.println("EXTRATO DESDE " + dia + "/" + mes + "/" + ano);
 					this.imprimeExtrato(this.banco.extratoConta(numeroConta, dataInicial));
 					break;
 				case "3": 
@@ -151,13 +159,16 @@ public class Interface {
 					dia = Data.substring(0, Data.indexOf("/"));
 					mes = Data.substring(Data.indexOf("/")+1, Data.indexOf("/",Data.indexOf("/")+1));
 					ano = Data.substring(1+Data.indexOf("/",Data.indexOf("/")+1), Data.length());
-					dataInicial = new GregorianCalendar(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+					dataInicial = new GregorianCalendar(Integer.parseInt(ano), Integer.parseInt(mes) -1, Integer.parseInt(dia));
 					System.out.println("Digite a data final no formato d/m/aaaa:");
 					Data = scan.nextLine();
-					dia = Data.substring(0, Data.indexOf("/"));
-					mes = Data.substring(Data.indexOf("/")+1, Data.indexOf("/",Data.indexOf("/")+1));
-					ano = Data.substring(1+Data.indexOf("/",Data.indexOf("/")+1), Data.length());
-					GregorianCalendar dataFinal = new GregorianCalendar(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+					String dia2 = Data.substring(0, Data.indexOf("/"));
+					String mes2 = Data.substring(Data.indexOf("/")+1, Data.indexOf("/",Data.indexOf("/")+1));
+					String ano2 = Data.substring(1+Data.indexOf("/",Data.indexOf("/")+1), Data.length());
+					GregorianCalendar dataFinal = new GregorianCalendar(Integer.parseInt(ano2), Integer.parseInt(mes2) -1, Integer.parseInt(dia2));
+					System.out.println();
+					System.out.println("-----------------------------");
+					System.out.println("EXTRATO ENTRE " + dia + "/" + mes + "/" + ano + " e "  + dia + "/" + mes + "/" + ano);
 					this.imprimeExtrato(this.banco.extratoConta(numeroConta, dataInicial, dataFinal));
 					break;
 				default:

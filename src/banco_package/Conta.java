@@ -71,7 +71,8 @@ public class Conta {
 		ArrayList<Movimentacao> listaRetorno = new ArrayList<Movimentacao>();
 		
 		for(Movimentacao m: listaMov) {
-			//compareTo: positivo se no futuro em relação a dataInicial.
+			//compareTo: positivo se no futuro em relaÃ§Ã£o a dataInicial
+
 			if(m.getDataMov().compareTo(dataInicial)>=0) {
 				listaRetorno.add(m);
 			}
@@ -85,7 +86,7 @@ public class Conta {
 			ArrayList<Movimentacao> listaRetorno = new ArrayList<Movimentacao>();
 			
 			for(Movimentacao m: listaMov) {
-				//compareTo: positivo se no futuro em relação a dataInicial.
+				//compareTo: positivo se no futuro em relaï¿½ï¿½o a dataInicial.
 				if( (m.getDataMov().compareTo(dataInicial)>=0) && (m.getDataMov().compareTo(dataFinal) <= 0)) {
 					listaRetorno.add(m);
 				}
@@ -98,7 +99,7 @@ public class Conta {
 		
 		GregorianCalendar calendar = new GregorianCalendar();
 		int month = calendar.get(Calendar.MONTH); //mes atual
-
+	    System.out.println("Mes atual: " + month);
 		ArrayList<Movimentacao> extratoMes = new ArrayList<Movimentacao>();
 		
 		for(Movimentacao Mov:listaMov) {

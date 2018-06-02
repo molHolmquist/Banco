@@ -213,7 +213,7 @@ public class Banco {
 				lines.add("=====");
 				GregorianCalendar calendar = m.getDataMov();
 				int ano = calendar.get(Calendar.YEAR);
-				int mes = calendar.get(Calendar.MONTH);
+				int mes = calendar.get(Calendar.MONTH) + 1;
 				int dia = calendar.get(Calendar.DAY_OF_MONTH);
 				lines.add(dia + "/" + mes + "/" + ano); // Data de movimentacao
 				lines.add(m.getDescricao()); //Descrição da movimentacao
@@ -382,7 +382,7 @@ public class Banco {
 									String dia = Data.substring(0, Data.indexOf("/"));
 									String mes = Data.substring(Data.indexOf("/")+1, Data.indexOf("/",Data.indexOf("/")+1));
 									String ano = Data.substring(1+Data.indexOf("/",Data.indexOf("/")+1), Data.length());
-									calendar = new GregorianCalendar(Integer.parseInt(ano), Integer.parseInt(mes), Integer.parseInt(dia));
+									calendar = new GregorianCalendar(Integer.parseInt(ano), Integer.parseInt(mes) -1, Integer.parseInt(dia));
 									break;
 								case 2:
 									//Descricao da movimentacao

@@ -72,11 +72,12 @@ public class Interface {
 	public void criaConta() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Digite o número do CPF ou CNPJ do cliente para o qual deseja criar a conta:");
-		String n = scan.nextLine();
+		String s = scan.nextLine();
 		boolean notFound = true;
 			for(Cliente c : this.banco.getListaCliente()) {
-				if(n == c.getCpf_cnpj()) {
+				if(s.equals(c.getCpf_cnpj())) {
 					this.banco.criaConta(c);
+					System.out.println("Conta criada. Caso a conta já exista, nenhuma alteração será feita.");
 					notFound = false; 
 					break;
 				}
@@ -89,11 +90,13 @@ public class Interface {
 	public void excluiConta() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Digite o número da conta a ser excluída:");
-		int numeroConta = scan.nextInt();
+		String SnumeroConta = scan.nextLine();
+		int numeroConta = Integer.parseInt(SnumeroConta);
 		boolean notFound = true;
 		for(Conta c : this.banco.getListaContas()) {
 			if(c.getNumConta() == numeroConta) {
 				this.banco.excluiConta(numeroConta);
+				System.out.println("Conta excluída.");
 				notFound = false;
 				break;
 			}

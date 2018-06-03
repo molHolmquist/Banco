@@ -13,7 +13,7 @@ public class Movimentacao {
 		dataMov = new GregorianCalendar();
 		descricao = new String(desc);
 		debitoCredito = debCre;
-		valor = val;		
+		valor = val;	 	
 	}
 	//Apenas para a leitura de dados de arquivo
 	Movimentacao(String desc, char debCre, double val, GregorianCalendar data){

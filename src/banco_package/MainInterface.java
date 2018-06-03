@@ -5,7 +5,7 @@ public class MainInterface {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		Banco bradesco = new Banco("TESTES");
+		Banco bradesco = new Banco("Bradesco");
 		bradesco.leituraDadosArquivo();
 	
 		Interface banquinho = new Interface(bradesco);

@@ -1,4 +1,4 @@
-package banco_package;
+package banco;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -11,7 +11,7 @@ public class Banco {
 	private ArrayList<Cliente> listaClientes = new ArrayList<Cliente>();
 	private ArrayList<Conta> listaContas = new ArrayList<Conta>();
 	
-	Banco(String nomeBanco){
+	public Banco(String nomeBanco){
 		this.nomeBanco = nomeBanco;
 	}
 	private Conta procuraConta(int numeroConta) { //procura uma conta com base

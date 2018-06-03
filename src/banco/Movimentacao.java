@@ -1,4 +1,4 @@
-package banco_package;
+package banco;
 
 import java.util.GregorianCalendar;
 

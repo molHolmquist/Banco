@@ -1,4 +1,4 @@
-package banco_package;
+package interfaceBanco;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -6,7 +6,23 @@ import java.util.GregorianCalendar;
 
 import java.util.Scanner;
 
+import banco.Banco;
+import banco.Cliente;
+import banco.Conta;
+import banco.Movimentacao;
+
 public class Interface {
+	
+	public static void main(String[] args) {
+
+		Banco bradesco = new Banco("Bradesco");
+		bradesco.leituraDadosArquivo();
+	
+		Interface Iterface_bradesco = new Interface(bradesco);
+		Iterface_bradesco.menu();
+		
+	}
+	private static int menuAberto = 0;
 	
 	public Banco banco;
 	//TODO tornar banco private
@@ -32,17 +48,18 @@ public class Interface {
 			System.out.println("Os clientes existentes são:");
 			int i = 1;
 			for(Cliente c : this.banco.getListaCliente()) { //Mostra todos os clientes
-				System.out.println(i+"-"+c.getNomeCliente()+"-"+c.getCpf_cnpj());
+				System.out.println(i + " - " + c.getNomeCliente() + " - "+c.getCpf_cnpj());
 				i++;
 			}
 			Scanner scan = new Scanner(System.in);
-			System.out.println("Qual você deseja exlcuir?");
+			System.out.println("Digite o índice do cliente que você deseja exlcuir:");
 			int n = scan.nextInt();
 			if(n <= i && n > 0) {
 				i = 1;
 				for(Cliente c : this.banco.getListaCliente()) {
 					if(i == n) {
 						this.banco.excluiCliente(c.getCpf_cnpj());
+						System.out.println("Cliente excluído.");
 						break;
 					}
 					i++;
@@ -359,8 +376,7 @@ public class Interface {
 		for (int i = 0; i < 3; ++i)  
 		       System.out.println();
 	}
-	
-	private static int menuAberto = 0;
+
 
 
 

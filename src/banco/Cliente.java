@@ -1,4 +1,4 @@
-package banco_package;
+package banco;
 
 public class Cliente {
 	
@@ -7,7 +7,7 @@ public class Cliente {
 	private String endereco;
 	private String fone;
 	
-	Cliente(String nome, String c, String end, String f){
+	public Cliente(String nome, String c, String end, String f){
 		nomeCliente = new String(nome);
 		cpf_cnpj = new String(c);
 		endereco = new String(end);

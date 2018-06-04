@@ -1,4 +1,4 @@
-------------CONTAS BANCÁRIAS-------------
+﻿------------CONTAS BANCÁRIAS-------------
 -----------------------------------------
 TOTAL DE CONTAS FEITAS
 5
@@ -24,9 +24,29 @@ D
 100.0
 =====
 1/5/2018
-TransferÃªncia para conta 2
+TransferÃƒÂªncia para conta 2
 D
 100.0
+=====
+2/6/2018
+Saque
+D
+5500.0
+=====
+2/6/2018
+Saque
+D
+4400.0
+=====
+2/6/2018
+Deposito
+C
+5500.0
+=====
+2/6/2018
+Deposito
+C
+4400.0
 ------------------------------
 2
 Arnaldo Costa Machado
@@ -59,7 +79,7 @@ C
 400.0
 ------------------------------
 4
-JoÃ£o Pereira Silva Afonso
+JoÃƒÂ£o Pereira Silva Afonso
 0.0
 73648695010
 Rua Fleming Bairro Centro
@@ -69,7 +89,7 @@ MOVIMENTACOES
 
 ------------------------------
 5
-MoisÃ©s Pedra Pinto
+MoisÃƒÂ©s Pedra Pinto
 700.0
 09839483210
 Rua Azevedo Carminda Bairro Kipoja

@@ -17,7 +17,7 @@ public class Interface {
 
 		Banco bradesco = new Banco("Bradesco");
 		bradesco.leituraDadosArquivo();
-	
+		bradesco.cobraCPMF();
 		Interface Iterface_bradesco = new Interface(bradesco);
 		Iterface_bradesco.menu();
 		
@@ -111,7 +111,7 @@ public class Interface {
 		menu();
 	}
 	public void cobraCPMF() {
-		this.cobraCPMF();
+		banco.cobraCPMF();
 		menu();
 	}
 	public void obtemSaldo() {
